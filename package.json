@@ -1,0 +1,22 @@
+{
+  "name": "Echo",
+  "title": "Echo",
+  "description": "Raw JavaScript lazy-loading images with HTML5 data-* attributes.",
+  "author": [
+    { "name" : "Todd Motto" },
+    { "url" : "http://toddmotto.com" }
+  ],
+  "homepage": "https://github.com/toddmotto/echo",
+  "licenses": [
+    { "type": "MIT" }
+  ],
+  "year" : "2013",
+  "version": "1.0.0",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-jshint": "~0.4.3",
+    "matchdep": "~0.1.2"
+  }
+}
