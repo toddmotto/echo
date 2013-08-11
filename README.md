@@ -1,6 +1,6 @@
 # Echo [![Build Status](https://travis-ci.org/toddmotto/echo.png)](https://travis-ci.org/toddmotto/echo)
 
-
+Echo, simple JavaScript image lazy-loading, no jQuery! Super fast and easy.
 
 ```html
 <img src="img/blank.gif" alt="Photo" data-echo="img/photo.jpg">
