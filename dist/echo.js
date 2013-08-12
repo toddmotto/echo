@@ -1,6 +1,6 @@
 /*!
  *  Echo
- *  @version 1.0.0
+ *  @version 1.1.0
  *  @author Todd Motto http://toddmotto.com
  *  Project: https://github.com/toddmotto/echo
  *
@@ -16,15 +16,13 @@ window.echo = (function (window, document) {
    */
   var Echo = function (elem) {
     this.elem = elem;
-    this.render();
-    this.listen();
   };
 
   /*
    * Images for echoing
    */
   var echoStore = [];
-  
+
   /*
    * Element in viewport logic
    */
@@ -70,16 +68,6 @@ window.echo = (function (window, document) {
   Echo.prototype = {
     init : function () {
       echoStore.push(this.elem);
-    },
-    render : function () {
-      if (document.addEventListener) {
-        document.addEventListener('DOMContentLoaded', echoImages, false);
-      } else {
-        window.onload = echoImages;
-      }
-    },
-    listen : function () {
-      window.onscroll = echoImages;
     }
   };
 
@@ -90,5 +78,15 @@ window.echo = (function (window, document) {
   for (var i = 0; i < lazyImgs.length; i++) {
     new Echo(lazyImgs[i]).init();
   }
+
+  /*
+   * Bind the events
+   */
+  if (document.addEventListener) {
+    document.addEventListener('DOMContentLoaded', echoImages, false);
+  } else {
+    window.onload = echoImages;
+  }
+  window.onscroll = echoImages;
 
 })(window, document);
