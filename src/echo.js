@@ -1,4 +1,4 @@
-window.echo = (function (window, document) {
+window.echo = (function (window, document, undefined) {
 
   'use strict';
 

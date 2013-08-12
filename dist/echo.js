@@ -7,7 +7,7 @@
  *  Raw JavaScript lazy-loading images with HTML5 data-* attributes.
  *  Copyright 2013. MIT licensed.
  */
-window.echo = (function (window, document) {
+window.echo = (function (window, document, undefined) {
 
   'use strict';
 
