@@ -1,22 +1,35 @@
 {
   "name": "Echo",
-  "title": "Echo",
-  "description": "Raw JavaScript lazy-loading images with HTML5 data-* attributes.",
-  "author": [
-    { "name" : "Todd Motto" },
-    { "url" : "http://toddmotto.com" }
-  ],
+  "version": "1.2.0",
   "homepage": "https://github.com/toddmotto/echo",
-  "licenses": [
-    { "type": "MIT" }
-  ],
+  "author": "Todd Motto",
   "year" : "2013",
-  "version": "1.1.0",
+  "description": "Lazy-loading images with data-* attributes",
+  "author": {
+    "name": "Todd Motto",
+    "email": "todd@toddmotto.com",
+    "url": "http://toddmotto.com",
+    "github" : "https://github.com/toddmotto"
+  },
+  "licenses": [{
+    "type": "MIT"
+  }],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/toddmotto/echo.git"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.7.1",
     "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-uglify": "~0.2.0",
-    "grunt-contrib-jshint": "~0.4.3",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-connect": "~0.3.0",
+    "grunt-contrib-watch": "~0.4.4",
+    "connect-livereload": "~0.2.0",
+    "grunt-open": "~0.2.0",
     "matchdep": "~0.1.2"
+  },
+  "peerDependencies": {
+    "grunt-cli": "*"
   }
 }

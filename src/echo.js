@@ -1,83 +1,34 @@
-window.echo = (function (window, document, undefined) {
+window.Echo = (function (window, document, undefined) {
 
   'use strict';
 
-  /*
-   * Constructor function
-   */
-  var Echo = function (elem) {
-    this.elem = elem;
-  };
+  var store;
 
-  /*
-   * Images for echoing
-   */
-  var echoStore = [];
-
-  /*
-   * Element in viewport logic
-   */
-  var scrolledIntoView = function (element) {
-    var coords = element.getBoundingClientRect();
+  var _inView = function (img) {
+    var coords = img.getBoundingClientRect();
     return ((coords.top >= 0 && coords.left >= 0 && coords.top) <= (window.innerHeight || document.documentElement.clientHeight));
   };
 
-  /*
-   * Changing src attr logic
-   */
-  var echoSrc = function (img, callback) {
-    img.src = img.getAttribute('data-echo');
-    if (callback) {
-      callback();
-    }
-  };
-
-  /*
-   * Remove loaded item from array
-   */
-  var removeEcho = function (element, index) {
-    if (echoStore.indexOf(element) !== -1) {
-      echoStore.splice(index, 1);
-    }
-  };
-
-  /*
-   * Echo the images and callbacks
-   */
-  var echoImages = function () {
-    for (var i = 0; i < echoStore.length; i++) {
-      var self = echoStore[i];
-      if (scrolledIntoView(self)) {
-        echoSrc(self, removeEcho(self, i));
+  var _pollImages = function () {
+    for (var i = 0; i < store.length; i++) {
+      var self = store[i];
+      if (_inView(self)) {
+        self.src = self.getAttribute('data-echo');
+        if (store.indexOf(self) !== -1) {
+          store.splice(i, 1);
+        }
       }
     }
   };
 
-  /*
-   * Prototypal setup
-   */
-  Echo.prototype = {
-    init : function () {
-      echoStore.push(this.elem);
-    }
+  var init = function () {
+    store = [].slice.call(document.querySelectorAll('[data-echo]'));
+    _pollImages();
+    window.onscroll = _pollImages;
   };
 
-  /*
-   * Initiate the plugin
-   */
-  var lazyImgs = document.querySelectorAll('img[data-echo]');
-  for (var i = 0; i < lazyImgs.length; i++) {
-    new Echo(lazyImgs[i]).init();
-  }
-
-  /*
-   * Bind the events
-   */
-  if (document.addEventListener) {
-    document.addEventListener('DOMContentLoaded', echoImages, false);
-  } else {
-    window.onload = echoImages;
-  }
-  window.onscroll = echoImages;
+  return {
+    init: init
+  };
 
 })(window, document);

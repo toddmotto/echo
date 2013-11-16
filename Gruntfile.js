@@ -1,87 +1,104 @@
-/*!
- *  Gruntfile.js configuration
+/*
+ * Gruntfile.js
+ * @author Todd Motto
+ * @version 1.0.0
  */
 
 'use strict';
 
-module.exports = function ( grunt ) {
+var LIVERELOAD_PORT = 35729;
 
-    /*
-     * Dynamically load the npm tasks
-     */
-    require( 'matchdep' ).filterDev('grunt-*').forEach( grunt.loadNpmTasks );
+var lrSnippet = require('connect-livereload')({
+  port: LIVERELOAD_PORT
+});
 
-    /*
-     * Grunt init
-     */
-    grunt.initConfig({
+var mountFolder = function (connect, dir) {
+  return connect.static(require('path').resolve(dir));
+};
 
-        /*
-         * Grunt JSON for project
-         */
-        pkg: grunt.file.readJSON( 'package.json' ),
+module.exports = function (grunt) {
 
-        /*
-         * Credit banner
-         */
-        tag: {
-            banner: "/*!\n" +
-                    " *  <%= pkg.title %>\n" +
-                    " *  @version <%= pkg.version %>\n" +
-                    " *  @author <%= pkg.author[0].name %> <%= pkg.author[1].url %>\n" +
-                    " *  Project: <%= pkg.homepage %>\n" +
-                    " *\n" +
-                    " *  <%= pkg.description %>\n" +
-                    " *  Copyright <%= pkg.year %>." +
-                    " <%= pkg.licenses[0].type %> licensed.\n" +
-                    " */\n"
-        },
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-        /*
-         * jsHint
-         */
-        jshint: {
-            files: ["src/echo.js"],
-            options: {
-                jshintrc: ".jshintrc"
-            }
-        },
-
-        /*
-         * Concat
-         */
-        concat: {
-            dist: {
-                src: ["src/echo.js"],
-                dest: "dist/echo.js"
-            },
-            options: {
-                banner: "<%= tag.banner %>"
-            }
-        },
-
-        /*
-         * UglifyJS
-         */
-        uglify: {
-            files: {
-                src: ["dist/echo.js"],
-                dest: "dist/echo.min.js"
-            },
-            options: {
-                banner: "<%= tag.banner %>"
-            }
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+    project: { name: 'echo' },
+    connect: {
+      options: {
+        port: 9000,
+        hostname: 'localhost'
+      },
+      livereload: {
+        options: {
+          middleware: function (connect) {
+            return [lrSnippet, mountFolder(connect, 'dist')];
+          }
         }
+      }
+    },
+    tag: {
+      banner: '/*!\n' +
+              ' *  <%= pkg.name %> v<%= pkg.version %>\n' +
+              ' *  <%= pkg.description %>\n' +
+              ' *  Project: <%= pkg.homepage %>\n' +
+              ' *  by <%= pkg.author.name %>: <%= pkg.author.url %>\n' +
+              ' *  Copyright.' +
+              ' <%= pkg.licenses[0].type %> licensed.\n' +
+              ' */\n'
+    },
+    jshint: {
+      options: {
+        jshintrc: '.jshintrc'
+      },
+      files: 'src/<%= project.name %>.js',
+    },
+    concat: {
+      dist: {
+        src: ['src/<%= project.name %>.js'],
+        dest: 'dist/<%= project.name %>.js'
+      },
+      options: {
+        banner: '<%= tag.banner %>'
+      }
+    },
+    uglify: {
+      files: {
+        src: ['dist/<%= project.name %>.js'],
+        dest: 'dist/<%= project.name %>.min.js'
+      },
+      options: {
+        banner: '<%= tag.banner %>'
+      }
+    },
+    open: {
+      server: {
+        path: 'http://localhost:<%= connect.options.port %>'
+      }
+    },
+    watch: {
+      concat: {
+        files: 'src/{,*/}*.js',
+        tasks: ['concat:dist', 'uglify']
+      },
+      livereload: {
+        options: {
+          livereload: LIVERELOAD_PORT
+        },
+        files: [
+          '{,*/}*.html',
+          'dist/{,*/}*.js'
+        ]
+      }
+    }
+  });
 
-    });
-
-    /*
-     * Register tasks
-     */
-    grunt.registerTask("default", [
-        "jshint",
-        "concat",
-        "uglify"
-    ]);
+  grunt.registerTask('default' , [
+    'jshint',
+    'concat:dist',
+    'uglify',
+    'connect:livereload',
+    'open',
+    'watch'
+  ]);
 
 };

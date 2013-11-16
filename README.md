@@ -1,6 +1,6 @@
 # Echo [![Build Status](https://travis-ci.org/toddmotto/echo.png)](https://travis-ci.org/toddmotto/echo)
 
-Echo, simple JavaScript image lazy-loading, no jQuery! Super fast and easy.
+Echo is a standalone JavaScript lazy-loading image tool. Echo is fast, less than 1KB and uses HTML5 data-* attributes.
 
 ```html
 <img src="img/blank.gif" alt="Photo" data-echo="img/photo.jpg">
@@ -23,11 +23,15 @@ Drop your files into your required folders, make sure you're using the file(s) f
 <body>
 	<!-- html content above -->
 	<script src="dist/echo.js"></script>
+  <script>
+  // call Echo.js
+  Echo.init();
+  </script>
 </body>
 ```
 
 ## Configuring Echo
-Echo config is super-simple, just add the image that needs to load when visible in a `data-echo` attribute:
+Add the image that needs to load when visible in a `data-echo` attribute:
 
 ```html
 <img src="img/blank.gif" alt="Photo" data-echo="img/photo.jpg">
