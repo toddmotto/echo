@@ -1,5 +1,5 @@
 /*!
- *  Echo v1.2.0
+ *  Echo v1.3.0
  *  Lazy-loading images with data-* attributes
  *  Project: https://github.com/toddmotto/echo
  *  by Todd Motto: http://toddmotto.com
