@@ -21,7 +21,7 @@ window.Echo = (function (window, document, undefined) {
       var self = store[i];
       if (_inView(self)) {
         self.src = self.getAttribute('data-echo');
-        if (store.indexOf(self) !== -1) {
+        if ([].indexOf && store.indexOf(self) !== -1) {
           store.splice(i, 1);
         }
       }
@@ -29,7 +29,7 @@ window.Echo = (function (window, document, undefined) {
   };
 
   var init = function () {
-    store = [].slice.call(document.querySelectorAll('[data-echo]'));
+    store = document.querySelectorAll('[data-echo]');
     _pollImages();
     window.onscroll = _pollImages;
   };
