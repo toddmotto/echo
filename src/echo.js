@@ -1,7 +1,7 @@
 if (!document.querySelectorAll && document.createStyleSheet) {
   document.querySelectorAll = function (selector) {
     var all = document.all, result = [], style = document.createStyleSheet();
-    style.addRule(selector, "fake:fake");
+    style.addRule(selector, 'fake:fake');
     for (var i = all.length - 1; i >= 0; i--) {
       if (all[i].currentStyle.fake === 'fake') {
         result.push(all[i]);
@@ -18,8 +18,9 @@ window.Echo = (function (window, document, undefined) {
   var store;
 
   var _inView = function (img) {
-    var coords = img.getBoundingClientRect();
-    return (coords.top >= 0 && coords.left >= 0 && coords.top) <= (window.innerHeight || document.documentElement.clientHeight);
+    var coords = img.getBoundingClientRect(),
+      height = window.innerHeight || document.documentElement.clientHeight;
+    return (coords.top >= 0 && coords.left >= 0 && coords.top) <= height;
   };
 
   var _pollImages = function () {
