@@ -1,6 +1,6 @@
 # Echo [![Build Status](https://travis-ci.org/toddmotto/echo.png)](https://travis-ci.org/toddmotto/echo)
 
-Echo is a standalone JavaScript lazy-loading image tool. Echo is fast, less than 1KB and uses HTML5 data-* attributes. Echo works in IE8+.
+Echo is a standalone JavaScript lazy-loading image tool. Echo is fast, less than 1KB and uses HTML5 data-* attributes.
 
 ```html
 <img src="img/blank.gif" alt="Photo" data-echo="img/photo.jpg">
@@ -45,6 +45,11 @@ Project files and folder structure.
 │   ├── echo.js
 │   └── echo.min.js
 ├── src/
+│   ├──	compatibility/
+│   │   ├──	array/
+│   │   │	└──	indexOf.js
+│   │   └──	document/
+│   │      └── querySelectorAll.js
 │   └── echo.js
 ├── .editorconfig
 ├── .gitignore
