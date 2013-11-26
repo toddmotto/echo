@@ -5,8 +5,9 @@ window.Echo = (function (window, document, undefined) {
   var store;
 
   var _inView = function (img) {
-    var coords = img.getBoundingClientRect();
-    return (coords.top >= 0 && coords.left >= 0 && coords.top) <= (window.innerHeight || document.documentElement.clientHeight);
+    var coords = img.getBoundingClientRect(),
+      height = window.innerHeight || document.documentElement.clientHeight;
+    return (coords.top >= 0 && coords.left >= 0 && coords.top) <= height;
   };
 
   var _pollImages = function () {
@@ -14,8 +15,8 @@ window.Echo = (function (window, document, undefined) {
       var self = store[i];
       if (_inView(self)) {
         self.src = self.getAttribute('data-echo');
-        if ([].indexOf && [].slice.call(store).indexOf(self) !== -1) {
-          [].slice.call(store).splice(i, 1);
+        if (store.indexOf(self) !== -1) {
+          store.splice(i, 1);
         }
       }
     }
