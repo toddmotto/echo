@@ -8,5 +8,5 @@ if (!document.querySelectorAll && document.createStyleSheet) {
       }
     }
     style.removeRule(0); return result;
-  }
+  };
 }
