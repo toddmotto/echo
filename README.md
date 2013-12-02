@@ -21,7 +21,7 @@ Using Echo.js is simple, just add the image you wish to load to a `data-echo`  a
 </body>
 ```
 
-### .init() API (options)
+## .init() API (options)
 
 The `init()` API takes a few options
 
@@ -35,7 +35,7 @@ Type: `Integer` Default: `250`
 
 The throttle is managed by an internal function that prevents performance issues from continuous firing of `window.onscroll` events. Using a throttle will set a small timeout when the user scrolls and will keep throttling until the user stops. The default is `250` milliseconds.
 
-### .render() API
+## .render() API
 
 Echo's callback `render()` can be used to make Echo poll your images when you're not scrolling, for instance if you've got a filter layout that swaps images but does not scroll, you need to call the internal functions without scrolling. Use `render()` for this:
 
