@@ -21,7 +21,7 @@ Using Echo.js is simple, just add the image you wish to load to a `data-echo`  a
 </body>
 ```
 
-#### .init() API (options)
+### .init() API (options)
 
 The `init()` API takes a few options
 
