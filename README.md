@@ -16,7 +16,7 @@ Using Echo.js is simple, just add the image you wish to load to a `data-echo`  a
     throttle: 250
   });
 
-  // Echo.render(); is also available
+  // Echo.render(); is also available for non-scroll callbacks
   </script>
 </body>
 ```
