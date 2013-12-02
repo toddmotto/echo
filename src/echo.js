@@ -8,11 +8,15 @@ window.Echo = (function (window, document, undefined) {
     var coords = el.getBoundingClientRect();
     return ((coords.top >= 0 && coords.left >= 0 && coords.top) <= (window.innerHeight || document.documentElement.clientHeight) + parseInt(offset));
   };
+  
+  var _getStyle = function(el, prop) {
+    return window.getComputedStyle ? window.getComputedStyle(el, null).getPropertyValue(prop) : el.currentStyle[prop];
+  };
 
   var _pollImages = function () {
     for (var i = store.length; i--;) {
       var self = store[i];
-      if (_inView(self)) {
+      if (_inView(self) && (_getStyle(self, 'display') !== 'none' && _getStyle(self.parentNode, 'display') !== 'none')) {
         self.src = self.getAttribute('data-echo');
         store.splice(i, 1);
       }
