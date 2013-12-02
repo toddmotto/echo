@@ -2,7 +2,7 @@ window.Echo = (function (window, document, undefined) {
 
   'use strict';
 
-  var store;
+  var store = [];
 
   var _inView = function (img) {
     var coords = img.getBoundingClientRect();
@@ -19,7 +19,9 @@ window.Echo = (function (window, document, undefined) {
   };
 
   var init = function () {
-    store = Array.prototype.slice.call(document.querySelectorAll('[data-echo]'));
+    var nodes = document.querySelectorAll('[data-echo]');
+    for (var i = nodes.length; i--; store.unshift(nodes[i]));
+
     _pollImages();
     window.onscroll = _pollImages;
   };
