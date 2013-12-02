@@ -34,6 +34,8 @@ window.Echo = (function (window, document, undefined) {
       store.push(nodes[i]);
     }
 
+    _throttle();
+
     if (document.addEventListener) {
       window.addEventListener('scroll', _throttle, false);
     } else {
