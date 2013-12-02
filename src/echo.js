@@ -24,11 +24,26 @@ window.Echo = (function (window, document, undefined) {
   var init = function () {
     store = document.querySelectorAll('[data-echo]');
     _pollImages();
-    window.onscroll = _pollImages;
+    _addEventListener(window, 'scroll', _pollImages);
   };
 
   return {
     init: init
+  };
+  
+  var _addEventListener = function(element, event, callback) {
+    if (element.addEventListener) {
+      _addEventListener = function(element, event, callback) {
+        element.addEventListener(event, callback, false);
+      };
+    }
+    else {
+      _addEventListener = function(element, event, callback) {
+        element.attachEvent('on' + event, callback);
+      };
+    }
+    
+    _addEventListener(element, event, callback);
   };
 
 })(window, document);
