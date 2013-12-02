@@ -10,19 +10,16 @@ window.Echo = (function (window, document, undefined) {
   };
 
   var _pollImages = function () {
-    for (var i = 0; i < store.length; i++) {
-      var self = store[i];
-      if (_inView(self)) {
-        self.src = self.getAttribute('data-echo');
-        if ([].indexOf && [].slice.call(store).indexOf(self) !== -1) {
-          [].slice.call(store).splice(i, 1);
-        }
+    for (var i = store.length; i--; ) {
+      if (_inView(store[i])) {
+        store[i].src = store[i].getAttribute('data-echo');
+        store.splice(i, 1);
       }
     }
   };
 
   var init = function () {
-    store = document.querySelectorAll('[data-echo]');
+    store = Array.prototype.slice.call(document.querySelectorAll('[data-echo]'));
     _pollImages();
     window.onscroll = _pollImages;
   };
