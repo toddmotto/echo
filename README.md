@@ -2,6 +2,10 @@
 
 Echo is a standalone JavaScript lazy-loading image tool. Echo is fast, less than 1KB and uses HTML5 data-* attributes. Check out a [demo](http://toddmotto.com/labs/echo). Echo works in IE8+.
 
+```
+bower install echojs
+```
+
 Using Echo.js is simple, just add the image you wish to load to a `data-echo`  attribute.
 
 ```html
@@ -44,13 +48,6 @@ Echo.render();
 ```
 
 Using `render()` is also throttled, which means you can bind it to a `window.onresize` event and it will be optimised for performance in the same way `window.onscroll` is.
-
-## Installing with Bower
-To install Echo into your project using Bower, use the GitHub repository hook:
-
-```
-bower install https://github.com/toddmotto/echo.git
-```
 
 ## Manual installation
 Drop your files into your required folders, make sure you're using the file(s) from the `dist` folder, which is the compiled production-ready code. Ensure you place the script before the closing `</body>` tag so the DOM tree is populated when the script runs.
