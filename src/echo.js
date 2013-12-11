@@ -30,9 +30,7 @@ window.Echo = (function (window, document, undefined) {
     offset = opts.offset || 0;
     throttle = opts.throttle || 250;
 
-    for (var i = 0; i < nodes.length; i++) {
-      store.push(nodes[i]);
-    }
+    store = Array.prototype.slice.call(nodes, []);
 
     _throttle();
 
