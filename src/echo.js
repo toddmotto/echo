@@ -38,8 +38,10 @@ window.Echo = (function (window, document, undefined) {
 
     if (document.addEventListener) {
       window.addEventListener('scroll', _throttle, false);
+      window.addEventListener('load', _throttle, false);
     } else {
       window.attachEvent('onscroll', _throttle);
+      window.attachEvent('onload', _throttle);
     }
   };
 
