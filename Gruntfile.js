@@ -37,14 +37,7 @@ module.exports = function (grunt) {
       }
     },
     tag: {
-      banner: '/*!\n' +
-              ' *  <%= pkg.name %> v<%= pkg.version %>\n' +
-              ' *  <%= pkg.description %>\n' +
-              ' *  Project: <%= pkg.homepage %>\n' +
-              ' *  by <%= pkg.author.name %>: <%= pkg.author.url %>\n' +
-              ' *  Copyright.' +
-              ' <%= pkg.licenses[0].type %> licensed.\n' +
-              ' */\n'
+      banner: '/*! <%= pkg.name %> v<%= pkg.version %> | (c) <%= grunt.template.today(\'yyyy\') %> @toddmotto | MIT license | github.com/toddmotto/echo */\n',
     },
     jshint: {
       options: {
@@ -96,9 +89,9 @@ module.exports = function (grunt) {
     'jshint',
     'concat:dist',
     'uglify',
-    'connect:livereload',
-    'open',
-    'watch'
+    // 'connect:livereload',
+    // 'open',
+    // 'watch'
   ]);
 
 };

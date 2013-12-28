@@ -1,10 +1,4 @@
-/*!
- *  Echo v1.4.0
- *  Lazy-loading with data-* attributes, offsets and throttle options
- *  Project: https://github.com/toddmotto/echo
- *  by Todd Motto: http://toddmotto.com
- *  Copyright. MIT licensed.
- */
+/*! Echo v1.4.0 | (c) 2013 @toddmotto | MIT license | github.com/toddmotto/echo */
 window.Echo = (function (window, document, undefined) {
 
   'use strict';
