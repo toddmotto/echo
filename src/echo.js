@@ -10,11 +10,13 @@ window.Echo = (function (window, document, undefined) {
   };
 
   var _pollImages = function () {
-    for (var i = store.length; i--;) {
+    for (var i = 0, l = store.length; i<l; i++) {
       var self = store[i];
-      if (_inView(self)) {
+      if ( self && _inView(self)) {
         self.src = self.getAttribute('data-echo');
         store.splice(i, 1);
+        l = store.length;
+        i--;
       }
     }
   };
