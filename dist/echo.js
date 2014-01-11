@@ -1,4 +1,4 @@
-/*! Echo v1.4.0 | (c) 2013 @toddmotto | MIT license | github.com/toddmotto/echo */
+/*! Echo v1.4.0 | (c) 2014 @toddmotto | MIT license | github.com/toddmotto/echo */
 window.Echo = (function (window, document, undefined) {
 
   'use strict';
@@ -7,7 +7,11 @@ window.Echo = (function (window, document, undefined) {
 
   var _inView = function (el) {
     var coords = el.getBoundingClientRect();
-    return ((coords.top >= 0 && coords.left >= 0 && coords.top) <= (window.innerHeight || document.documentElement.clientHeight) + parseInt(offset));
+    return (
+      (coords.top >= 0 && coords.left >= 0) &&
+      coords.top <= (window.innerHeight || document.documentElement.clientHeight) + parseInt(offset) &&
+      coords.left <= (window.innerWidth || document.documentElement.clientWidth) + parseInt(offset)
+    );
   };
 
   var _pollImages = function () {
