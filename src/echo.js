@@ -2,7 +2,7 @@ window.Echo = (function (window, document, undefined) {
 
   'use strict';
 
-  var store = [], offset, throttle, poll;
+  var store = [], offset, throttle, poll, domElement;
 
   var _inView = function (el) {
     var coords = el.getBoundingClientRect();
@@ -25,10 +25,12 @@ window.Echo = (function (window, document, undefined) {
   };
 
   var init = function (obj) {
-    var nodes = document.querySelectorAll('[data-echo]');
+    
     var opts = obj || {};
     offset = opts.offset || 0;
     throttle = opts.throttle || 250;
+    domElement = opts.domElement ? document.querySelector(opts.domElement) : window;
+    var nodes = document.querySelectorAll( (opts.domElement || "") + ' [data-echo]');
 
     for (var i = 0; i < nodes.length; i++) {
       store.push(nodes[i]);
@@ -37,9 +39,9 @@ window.Echo = (function (window, document, undefined) {
     _throttle();
 
     if (document.addEventListener) {
-      window.addEventListener('scroll', _throttle, false);
+      domElement.addEventListener('scroll', _throttle, false);
     } else {
-      window.attachEvent('onscroll', _throttle);
+      domElement.attachEvent('onscroll', _throttle);
     }
   };
 
