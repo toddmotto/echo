@@ -29,7 +29,7 @@ window.Echo = (function (window, document, undefined) {
     var opts = obj || {};
     offset = opts.offset || 0;
     throttle = opts.throttle || 250;
-    domElement = document.querySelector( opts.domElement ) || window;
+    domElement = opts.domElement ? document.querySelector( opts.domElement ) : window;
     var nodes = document.querySelectorAll( opts.domElement + ' [data-echo]');
 
     for (var i = 0; i < nodes.length; i++) {
