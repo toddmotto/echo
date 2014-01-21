@@ -15,7 +15,6 @@ window.Echo = (function (window, document, undefined) {
     var storeLength = store.length;
 
     if (storeLength > 0) {
-      console.log("Remaining: " + storeLength);
       for (var i = storeLength; i--;) {
         var self = store[i];
         if (_inView(self)) {
@@ -30,7 +29,6 @@ window.Echo = (function (window, document, undefined) {
         window.detachEvent('onscroll', _throttle);      
       }
       clearTimeout(poll);
-      console.log("done");
     }
   };
 
