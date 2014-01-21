@@ -13,7 +13,11 @@ window.Echo = (function (window, document, undefined) {
     for (var i = store.length; i--;) {
       var self = store[i];
       if (_inView(self)) {
-        self.src = self.getAttribute('data-echo');
+        if (self.tagName.toLowerCase() === 'img') {
+          self.src = self.getAttribute('data-echo');
+        } else {
+          self.style.backgroundImage = 'url(' + self.getAttribute('data-echo') + ')';
+        }
         store.splice(i, 1);
       }
     }
