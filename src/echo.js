@@ -1,3 +1,4 @@
+/*! Echo v1.4.0 | (c) 2013 @toddmotto | MIT license | github.com/toddmotto/echo */
 window.Echo = (function (window, document, undefined) {
 
   'use strict';
@@ -10,12 +11,26 @@ window.Echo = (function (window, document, undefined) {
   };
 
   var _pollImages = function () {
-    for (var i = store.length; i--;) {
-      var self = store[i];
-      if (_inView(self)) {
-        self.src = self.getAttribute('data-echo');
-        store.splice(i, 1);
+    
+    var storeLength = store.length;
+
+    if (storeLength > 0) {
+      console.log("Remaining: " + storeLength);
+      for (var i = storeLength; i--;) {
+        var self = store[i];
+        if (_inView(self)) {
+          self.src = self.getAttribute('data-echo');
+          store.splice(i, 1);
+        }
       }
+    } else {
+      if (document.removeEventListener) {
+        window.removeEventListener('scroll', _throttle);
+      } else {
+        window.detachEvent('onscroll', _throttle);      
+      }
+      clearTimeout(poll);
+      console.log("done");
     }
   };
 
