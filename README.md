@@ -30,12 +30,12 @@ Using Echo.js is simple, just add the image you wish to load to a `data-echo`  a
 The `init()` API takes a few options
 
 #### offset
-Type: `Integer` Default: `0`
+Type: `Number|String` Default: `0`
 
 The `offset` option allows you to specify how far below the viewport you want Echo to _begin_ loading your images. If you specify `0`, Echo will load your image as soon as it is visible in the viewport, if you want to load _1000px_ below the viewport, use `1000`.
 
 #### throttle
-Type: `Integer` Default: `250`
+Type: `Number|String` Default: `250`
 
 The throttle is managed by an internal function that prevents performance issues from continuous firing of `window.onscroll` events. Using a throttle will set a small timeout when the user scrolls and will keep throttling until the user stops. The default is `250` milliseconds.
 
@@ -53,7 +53,7 @@ Using `render()` is also throttled, which means you can bind it to a `window.onr
 Drop your files into your required folders, make sure you're using the file(s) from the `dist` folder, which is the compiled production-ready code. Ensure you place the script before the closing `</body>` tag so the DOM tree is populated when the script runs.
 
 ## Configuring Echo
-Add the image that needs to load when visible in a `data-echo` attribute:
+Add the image that needs to load when it's visible inside the viewport in a `data-echo` attribute:
 
 ```html
 <img src="img/blank.gif" alt="Photo" data-echo="img/photo.jpg">
