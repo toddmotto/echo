@@ -14,6 +14,8 @@ window.Echo = (function (global, document, undefined) {
    */
   var offset, throttle, poll;
 
+  var onRender;
+
   /**
    *  _inView
    * @private
@@ -36,6 +38,9 @@ window.Echo = (function (global, document, undefined) {
       for (var i = 0; i < length; i++) {
         var self = store[i];
         if (self && _inView(self)) {
+          if(onRender){
+            onRender(self);
+          }
           self.src = self.getAttribute('data-echo');
           store.splice(i, 1);
           length = store.length;
@@ -73,6 +78,7 @@ window.Echo = (function (global, document, undefined) {
     var opts = obj || {};
     offset = parseInt(opts.offset || 0);
     throttle = parseInt(opts.throttle || 250);
+    onRender = opts.onRender;
 
     for (var i = 0; i < nodes.length; i++) {
       store.push(nodes[i]);
