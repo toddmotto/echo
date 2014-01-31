@@ -12,7 +12,7 @@ window.Echo = (function (global, document, undefined) {
   /**
    * offset, throttle, poll vars
    */
-  var offset, throttle, poll;
+  var offset, throttle, poll, finalPoll;
 
   /**
    *  _inView
@@ -50,6 +50,10 @@ window.Echo = (function (global, document, undefined) {
       }
       clearTimeout(poll);
     }
+
+    poll = setTimeout(function(){
+        poll = null;
+      }, throttle);
   };
 
   /**
@@ -57,8 +61,12 @@ window.Echo = (function (global, document, undefined) {
    * @private
    */
   var _throttle = function () {
-    clearTimeout(poll);
-    poll = setTimeout(_pollImages, throttle);
+    if (!poll) {
+      _pollImages();
+    } else {
+      clearTimeout(finalPoll);
+      finalPoll = setTimeout (_pollImages, throttle);
+    }
   };
 
   /**
