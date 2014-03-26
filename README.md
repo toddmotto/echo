@@ -49,18 +49,13 @@ The `offsetBot` option allows you to specify how far below the viewport you want
 #### throttle
 Type: `Number|String` Default: `250`
 
+The throttle is managed by an internal function that prevents performance issues from continuous firing of `window.onscroll` events. Using a throttle will set a small timeout when the user scrolls and will keep throttling until the user stops. The default is `250` milliseconds.
+
 #### unload
 Type: `Boolean` Default: `false`
 
 This option will tell echo to unload loaded images once they have scrolled beyond the viewport (including the offset area).
 This option requires the `placeholder` option also be set.
-
-#### placeholder
-Type: `String`
-
-When `unload` is enabled it will replace the image's `src` with this value
-
-The throttle is managed by an internal function that prevents performance issues from continuous firing of `window.onscroll` events. Using a throttle will set a small timeout when the user scrolls and will keep throttling until the user stops. The default is `250` milliseconds.
 
 ## .render() API
 

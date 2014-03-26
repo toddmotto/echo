@@ -15,9 +15,9 @@ window.Echo = (function (global, document, undefined) {
   var toBeUnloaded = [];
 
   /**
-   * offsetBot, offsetTop throttle, poll, unload, placeholder vars
+   * offsetBot, offsetTop throttle, poll, unload vars
    */
-  var offsetBot, offsetTop,  throttle, poll, unload, placeholder;
+  var offsetBot, offsetTop,  throttle, poll, unload;
 
   /**
    *  _inView
@@ -46,13 +46,14 @@ window.Echo = (function (global, document, undefined) {
       for (i = 0; i < loadingLength; i++) {
         self = toBeLoaded[i];
         if (self && _inView(self)) {
+          if(unload) {
+            self.setAttribute('data-echo-placeholder', self.src);
+            toBeUnloaded.push(self);
+          }
           self.src = self.getAttribute('data-echo');
           toBeLoaded.splice(i, 1);
           loadingLength = toBeLoaded.length;
           i--;
-          if(unload && !!placeholder) {
-            toBeUnloaded.push(self);
-          }
         }
       }
     }
@@ -61,7 +62,7 @@ window.Echo = (function (global, document, undefined) {
       for(i = 0; i < unloadingLength; i++) {
         self = toBeUnloaded[i];
         if (self && !_inView(self)) {
-          self.src = placeholder;
+          self.src = self.getAttribute('data-echo-placeholder');
           toBeUnloaded.splice(i, 1);
           unloadingLength = toBeUnloaded.length;
           i--;
@@ -91,7 +92,6 @@ window.Echo = (function (global, document, undefined) {
    * @param {Number|String} [obj.offsetBot]
    * @param {Number|String} [obj.offsetTop]
    * @param {Boolean} [obj.unload]
-   * @param {String} [obj.placeholder]
    */
   var init = function (obj) {
 
@@ -102,7 +102,6 @@ window.Echo = (function (global, document, undefined) {
     offsetTop = parseInt(opts.offsetTop || offset);
     throttle = parseInt(opts.throttle || 250);
     unload = !!opts.unload;
-    placeholder = opts.placeholder;
 
     toBeLoaded = [];
     toBeUnloaded = [];
