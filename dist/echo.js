@@ -16,9 +16,9 @@ window.Echo = (function (global, document, undefined) {
   var toBeUnloaded = [];
 
   /**
-   * offset, offsetTop throttle, poll, unload vars
+   * offsetBot, offsetTop throttle, poll, unload vars
    */
-  var offset, offsetTop,  throttle, poll, unload;
+  var offsetBot, offsetTop,  throttle, poll, unload;
 
   /**
    *  _inView
@@ -28,8 +28,8 @@ window.Echo = (function (global, document, undefined) {
    */
   var _inView = function (element) {
     var coords = element.getBoundingClientRect();
-    var topInView = coords.top >= 0 && coords.left >= 0 && coords.top <= (window.innerHeight || document.documentElement.clientHeight) + offset && coords.top >= -1 * offsetTop;
-    var botInView = coords.bottom >= -1 * offsetTop && coords.left >= 0 && coords.bottom <= (window.innerHeight || document.documentElement.clientHeight) + offset;
+    var topInView = coords.top >= 0 && coords.left >= 0 && coords.top <= (window.innerHeight || document.documentElement.clientHeight) + offsetBot && coords.top >= -1 * offsetTop;
+    var botInView = coords.bottom >= -1 * offsetTop && coords.left >= 0 && coords.bottom <= (window.innerHeight || document.documentElement.clientHeight) + offsetBot;
     return topInView || botInView;
   };
 
@@ -89,12 +89,16 @@ window.Echo = (function (global, document, undefined) {
    * @param {Object} [obj] Passed in Object with options
    * @param {Number|String} [obj.throttle]
    * @param {Number|String} [obj.offset]
+   * @param {Number|String} [obj.offsetBot]
+   * @param {Number|String} [obj.offsetTop]
+   * @param {Boolean} [obj.unload]
    */
   var init = function (obj) {
 
     var nodes = document.querySelectorAll('[data-echo]');
     var opts = obj || {};
-    offset = parseInt(opts.offset || 0);
+    var offset = parseInt(opts.offset || 0);
+    offsetBot = parseInt(opts.offsetBot || offset);
     offsetTop = parseInt(opts.offsetTop || offset);
     throttle = parseInt(opts.throttle || 250);
     unload = !!opts.unload;
