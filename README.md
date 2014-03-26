@@ -12,12 +12,12 @@ Using Echo.js is simple, just add the image you wish to load to a `data-echo`  a
 <body>
 
   <img src="img/blank.gif" alt="Photo" data-echo="img/photo.jpg">
-  
+
   <script src="dist/echo.js"></script>
   <script>
   Echo.init({
     offset: 100,
-    throttle: 250
+    throttle: 250,
   });
 
   // Echo.render(); is also available for non-scroll callbacks
@@ -32,10 +32,31 @@ The `init()` API takes a few options
 #### offset
 Type: `Number|String` Default: `0`
 
-The `offset` option allows you to specify how far below the viewport you want Echo to _begin_ loading your images. If you specify `0`, Echo will load your image as soon as it is visible in the viewport, if you want to load _1000px_ below the viewport, use `1000`.
+The `offset` option allows you to specify how far below and above the viewport you want Echo to _begin_ loading your images. If you specify `0`, Echo will load your image as soon as it is visible in the viewport, if you want to load _1000px_ below or above the viewport, use `1000`.
+
+#### offsetTop
+Type: `Number|String` Default: `offset`'s value
+
+The `offsetTop` option allows you to specify how far above the viewport you want Echo to _begin_ loading your images.
+
+#### offsetBot
+Type: `Number|String` Default: `offset`'s value
+
+The `offsetBot` option allows you to specify how far below the viewport you want Echo to _begin_ loading your images.
 
 #### throttle
 Type: `Number|String` Default: `250`
+
+#### unload
+Type: `Boolean` Default: `false`
+
+This option will tell echo to unload loaded images once they have scrolled beyond the viewport (including the offset area).
+This option requires the `placeholder` option also be set.
+
+#### placeholder
+Type: `String`
+
+When `unload` is enabled it will replace the image's `src` with this value
 
 The throttle is managed by an internal function that prevents performance issues from continuous firing of `window.onscroll` events. Using a throttle will set a small timeout when the user scrolls and will keep throttling until the user stops. The default is `250` milliseconds.
 

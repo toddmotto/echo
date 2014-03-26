@@ -105,6 +105,9 @@ window.Echo = (function (global, document, undefined) {
     unload = !!opts.unload;
     placeholder = opts.placeholder;
 
+    toBeLoaded = [];
+    toBeUnloaded = [];
+
     for (var i = 0; i < nodes.length; i++) {
       toBeLoaded.push(nodes[i]);
     }
