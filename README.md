@@ -18,6 +18,8 @@ Using Echo.js is simple, just add the image you wish to load to a `data-echo`  a
   Echo.init({
     offset: 100,
     throttle: 250,
+    unload: false,
+    placeholder: 'img/blank.gif'
   });
 
   // Echo.render(); is also available for non-scroll callbacks
