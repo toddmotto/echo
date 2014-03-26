@@ -16,9 +16,9 @@ window.Echo = (function (global, document, undefined) {
   var toBeUnloaded = [];
 
   /**
-   * offsetBot, offsetTop throttle, poll, unload vars
+   * offsetBot, offsetTop throttle, poll, unload, placeholder vars
    */
-  var offsetBot, offsetTop,  throttle, poll, unload;
+  var offsetBot, offsetTop,  throttle, poll, unload, placeholder;
 
   /**
    *  _inView
@@ -51,7 +51,7 @@ window.Echo = (function (global, document, undefined) {
           toBeLoaded.splice(i, 1);
           loadingLength = toBeLoaded.length;
           i--;
-          if(unload) {
+          if(unload && !!placeholder) {
             toBeUnloaded.push(self);
           }
         }
@@ -62,7 +62,7 @@ window.Echo = (function (global, document, undefined) {
       for(i = 0; i < unloadingLength; i++) {
         self = toBeUnloaded[i];
         if (self && !_inView(self)) {
-          self.src = self.getAttribute('data-echo-holder');
+          self.src = placeholder;
           toBeUnloaded.splice(i, 1);
           unloadingLength = toBeUnloaded.length;
           i--;
@@ -92,6 +92,7 @@ window.Echo = (function (global, document, undefined) {
    * @param {Number|String} [obj.offsetBot]
    * @param {Number|String} [obj.offsetTop]
    * @param {Boolean} [obj.unload]
+   * @param {String} [obj.placeholder]
    */
   var init = function (obj) {
 
@@ -102,6 +103,7 @@ window.Echo = (function (global, document, undefined) {
     offsetTop = parseInt(opts.offsetTop || offset);
     throttle = parseInt(opts.throttle || 250);
     unload = !!opts.unload;
+    placeholder = opts.placeholder;
 
     for (var i = 0; i < nodes.length; i++) {
       toBeLoaded.push(nodes[i]);
