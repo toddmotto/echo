@@ -16,6 +16,12 @@ window.Echo = (function (global, document, undefined) {
   var toBeUnloaded = [];
 
   /**
+   * callback - initialized to a no-op so that no validations on it's presence need to be made
+   * @type {Function}
+   */
+  var callback = function(){};
+
+  /**
    * offsetBot, offsetTop throttle, poll, unload vars
    */
   var offsetBot, offsetTop,  throttle, poll, unload;
@@ -52,6 +58,7 @@ window.Echo = (function (global, document, undefined) {
             toBeUnloaded.push(self);
           }
           self.src = self.getAttribute('data-echo');
+          callback(self, 'load');
           toBeLoaded.splice(i, 1);
           loadingLength = toBeLoaded.length;
           i--;
@@ -64,6 +71,7 @@ window.Echo = (function (global, document, undefined) {
         self = toBeUnloaded[i];
         if (self && !_inView(self)) {
           self.src = self.getAttribute('data-echo-placeholder');
+          callback(self, 'unload');
           toBeUnloaded.splice(i, 1);
           unloadingLength = toBeUnloaded.length;
           i--;
@@ -93,6 +101,7 @@ window.Echo = (function (global, document, undefined) {
    * @param {Number|String} [obj.offsetBot]
    * @param {Number|String} [obj.offsetTop]
    * @param {Boolean} [obj.unload]
+   * @param {Function} [obj.callback]
    */
   var init = function (obj) {
 
@@ -103,6 +112,7 @@ window.Echo = (function (global, document, undefined) {
     offsetTop = parseInt(opts.offsetTop || offset);
     throttle = parseInt(opts.throttle || 250);
     unload = !!opts.unload;
+    callback = opts.callback || callback;
 
     toBeLoaded = [];
     toBeUnloaded = [];

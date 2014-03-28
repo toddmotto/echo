@@ -18,7 +18,8 @@ Using Echo.js is simple, just add the image you wish to load to a `data-echo`  a
   Echo.init({
     offset: 100,
     throttle: 250,
-    unload: false
+    unload: false,
+    callback: function(element, op){ console.log(element, "has been", op+'ed')}
   });
 
   // Echo.render(); is also available for non-scroll callbacks
@@ -55,6 +56,24 @@ Type: `Boolean` Default: `false`
 
 This option will tell echo to unload loaded images once they have scrolled beyond the viewport (including the offset area).
 This option requires the `placeholder` option also be set.
+
+#### callback
+Type: `Function`
+
+The callback will be passed the element that has been updated and what the update operation was (ie `load` or `unload`). This can be useful if you want to add a class like `loaded` to the element. Or do some logging.
+
+```js
+Echo.init({
+  callback: function(element, op) {
+    if(op === 'load') {
+      elemend.classList.add('loaded');
+    } else {
+      elemend.classList.remove('loaded');
+    }
+  }
+});
+```
+
 
 ## .render() API
 
