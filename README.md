@@ -12,7 +12,7 @@ Using Echo.js is simple, just add the image you wish to load to a `data-echo`  a
 <body>
 
   <img src="img/blank.gif" alt="Photo" data-echo="img/photo.jpg">
-  
+
   <script src="dist/echo.js"></script>
   <script>
   Echo.init({
@@ -38,6 +38,11 @@ The `offset` option allows you to specify how far below the viewport you want Ec
 Type: `Number|String` Default: `250`
 
 The throttle is managed by an internal function that prevents performance issues from continuous firing of `window.onscroll` events. Using a throttle will set a small timeout when the user scrolls and will keep throttling until the user stops. The default is `250` milliseconds.
+
+#### callback
+Type: `Function`
+
+The callback will be passed the element that has become in view just after the src has been replaced. This can be useful if you want to add a class like `loaded` to the element
 
 ## .render() API
 

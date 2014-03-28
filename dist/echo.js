@@ -10,7 +10,13 @@ window.Echo = (function (global, document, undefined) {
   var store = [];
 
   /**
-   * offset, throttle, poll vars
+   * callback - initialized to a no-op so that no validations on it's presence need to be made
+   * @type {Function}
+   */
+  var callback = function(){};
+
+  /**
+   * offset, throttle, poll, vars
    */
   var offset, throttle, poll;
 
@@ -37,6 +43,7 @@ window.Echo = (function (global, document, undefined) {
         var self = store[i];
         if (self && _inView(self)) {
           self.src = self.getAttribute('data-echo');
+          callback(self);
           store.splice(i, 1);
           length = store.length;
           i--;
@@ -66,6 +73,7 @@ window.Echo = (function (global, document, undefined) {
    * @param {Object} [obj] Passed in Object with options
    * @param {Number|String} [obj.throttle]
    * @param {Number|String} [obj.offset]
+   * @param {Function} [obj.callback]
    */
   var init = function (obj) {
 
@@ -73,6 +81,7 @@ window.Echo = (function (global, document, undefined) {
     var opts = obj || {};
     offset = parseInt(opts.offset || 0);
     throttle = parseInt(opts.throttle || 250);
+    callback = opts.callback || callback;
 
     for (var i = 0; i < nodes.length; i++) {
       store.push(nodes[i]);
