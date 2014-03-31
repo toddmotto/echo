@@ -41,7 +41,11 @@ window.Echo = (function (global, document, undefined) {
       for (var i = 0; i < length; i++) {
         var self = store[i];
         if (self && _inView(self)) {
-          self.src = self.getAttribute('data-echo');
+          if (self.tagName.toLowerCase() !== 'img') {
+            self.style.cssText += "background-image: url('" + self.getAttribute('data-echo') + "');";
+          } else {
+            self.src = self.getAttribute('data-echo');
+          }
           callback(self);
           store.splice(i, 1);
           length = store.length;
