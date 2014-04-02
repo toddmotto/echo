@@ -21,6 +21,25 @@ window.Echo = (function (global, document, undefined) {
   var offset, throttle, poll;
 
   /**
+   * _contains
+   * @private
+   * @param {Node} parent Parent node
+   * @param {Node} descendant Descendant node
+   * @returns {Boolean} Does parent contain descendant
+   */
+  var _contains = !!document.compareDocumentPosition ?
+  // IE
+  function (parent, descendant) {
+    return parent.contains(descendant);
+  } :
+  // Everyone else
+  function (parent, descendant) {
+    /*jslint bitwise: true */
+    return parent.compareDocumentPosition(descendant) & 16;
+    /*jslint bitwise: false */
+  };
+
+  /**
    *  _inView
    * @private
    * @param {Element} element Image element
@@ -41,7 +60,7 @@ window.Echo = (function (global, document, undefined) {
     if (length > 0) {
       for (var i = 0; i < length; i++) {
         var self = store[i];
-        if (self && _inView(self)) {
+        if (self && _contains(document.documentElement, self) && _inView(self)) {
           self.src = self.getAttribute('data-echo');
           callback(self);
           store.splice(i, 1);
