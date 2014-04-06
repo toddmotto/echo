@@ -76,7 +76,7 @@ window.Echo = (function (global, document, undefined) {
    */
   var init = function (obj) {
 
-    var nodes = document.querySelectorAll('[data-echo]');
+    var nodes = document.querySelectorAll('img[data-echo]');
     var opts = obj || {};
     offset = parseInt(opts.offset || 0);
     throttle = parseInt(opts.throttle || 250);
