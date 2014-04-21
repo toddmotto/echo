@@ -54,6 +54,12 @@ module.exports = function (grunt) {
         banner: '<%= tag.banner %>'
       }
     },
+    umd: {
+      dist: {
+        src: 'dist/<%= project.name %>.js',
+        objectToExport: 'echo'
+      }
+    },
     uglify: {
       files: {
         src: ['dist/<%= project.name %>.js'],
@@ -88,6 +94,7 @@ module.exports = function (grunt) {
   grunt.registerTask('default' , [
     'jshint',
     'concat:dist',
+    'umd:dist',
     'uglify',
     // 'connect:livereload',
     // 'open',
