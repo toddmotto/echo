@@ -1,6 +1,7 @@
 {
   "name": "Echo",
   "version": "1.5.0",
+  "main": "dist/echo.js",
   "homepage": "https://github.com/toddmotto/echo",
   "author": "Todd Motto",
   "description": "Lazy-loading with data-* attributes, offset and throttle options",
@@ -26,6 +27,7 @@
     "grunt-contrib-watch": "~0.4.4",
     "connect-livereload": "~0.2.0",
     "grunt-open": "~0.2.0",
+    "grunt-umd": "^1.7.3",
     "matchdep": "~0.1.2"
   },
   "peerDependencies": {

@@ -1,4 +1,5 @@
-window.Echo = (function (global, document, undefined) {
+/* exported echo */
+var echo = (function (global, document, undefined) {
 
   'use strict';
 
