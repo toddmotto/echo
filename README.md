@@ -17,7 +17,9 @@ Using Echo.js is simple, just add the image you wish to load to a `data-echo`  a
   <script>
   Echo.init({
     offset: 100,
-    throttle: 250
+    throttle: 250,
+    unload: false,
+    callback: function(element, op){ console.log(element, "has been", op+'ed')}
   });
 
   // Echo.render(); is also available for non-scroll callbacks
@@ -32,17 +34,46 @@ The `init()` API takes a few options
 #### offset
 Type: `Number|String` Default: `0`
 
-The `offset` option allows you to specify how far below the viewport you want Echo to _begin_ loading your images. If you specify `0`, Echo will load your image as soon as it is visible in the viewport, if you want to load _1000px_ below the viewport, use `1000`.
+The `offset` option allows you to specify how far below and above the viewport you want Echo to _begin_ loading your images. If you specify `0`, Echo will load your image as soon as it is visible in the viewport, if you want to load _1000px_ below or above the viewport, use `1000`.
+
+#### offsetTop
+Type: `Number|String` Default: `offset`'s value
+
+The `offsetTop` option allows you to specify how far above the viewport you want Echo to _begin_ loading your images.
+
+#### offsetBot
+Type: `Number|String` Default: `offset`'s value
+
+The `offsetBot` option allows you to specify how far below the viewport you want Echo to _begin_ loading your images.
 
 #### throttle
 Type: `Number|String` Default: `250`
 
 The throttle is managed by an internal function that prevents performance issues from continuous firing of `window.onscroll` events. Using a throttle will set a small timeout when the user scrolls and will keep throttling until the user stops. The default is `250` milliseconds.
 
+#### unload
+Type: `Boolean` Default: `false`
+
+This option will tell echo to unload loaded images once they have scrolled beyond the viewport (including the offset area).
+This option requires the `placeholder` option also be set.
+
 #### callback
 Type: `Function`
 
-The callback will be passed the element that has become in view just after the src has been replaced. This can be useful if you want to add a class like `loaded` to the element
+The callback will be passed the element that has been updated and what the update operation was (ie `load` or `unload`). This can be useful if you want to add a class like `loaded` to the element. Or do some logging.
+
+```js
+Echo.init({
+  callback: function(element, op) {
+    if(op === 'load') {
+      elemend.classList.add('loaded');
+    } else {
+      elemend.classList.remove('loaded');
+    }
+  }
+});
+```
+
 
 ## .render() API
 
