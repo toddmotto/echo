@@ -51,10 +51,10 @@ Type: `Number|String` Default: `offsetVertical`'s value
 
 The `offsetTop` option allows you to specify how far above the viewport you want Echo to _begin_ loading your images.
 
-#### offsetBot
+#### offsetBottom
 Type: `Number|String` Default: `offsetVertical`'s value
 
-The `offsetBot` option allows you to specify how far below the viewport you want Echo to _begin_ loading your images.
+The `offsetBottom` option allows you to specify how far below the viewport you want Echo to _begin_ loading your images.
 
 #### offsetLeft
 Type: `Number|String` Default: `offsetVertical`'s value

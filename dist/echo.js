@@ -103,7 +103,7 @@ window.Echo = (function (global, document, undefined) {
    * @param {Object} [opts] Passed in Object with options
    * @param {Number|String} [opts.throttle]
    * @param {Number|String} [opts.offset]
-   * @param {Number|String} [opts.offsetBot]
+   * @param {Number|String} [opts.offsetBottom]
    * @param {Number|String} [opts.offsetTop]
    * @param {Number|String} [opts.offsetLeft]
    * @param {Number|String} [opts.offsetRight]
@@ -124,7 +124,7 @@ window.Echo = (function (global, document, undefined) {
 
     offset = {
       t: optionToInt(opts.offsetTop, offsetVertical),
-      b: optionToInt(opts.offsetBot, offsetVertical),
+      b: optionToInt(opts.offsetBottom, offsetVertical),
       l: optionToInt(opts.offsetLeft, offsetHorizontal),
       r: optionToInt(opts.offsetRight, offsetHorizontal)
     };
