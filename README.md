@@ -34,17 +34,37 @@ The `init()` API takes a few options
 #### offset
 Type: `Number|String` Default: `0`
 
-The `offset` option allows you to specify how far below and above the viewport you want Echo to _begin_ loading your images. If you specify `0`, Echo will load your image as soon as it is visible in the viewport, if you want to load _1000px_ below or above the viewport, use `1000`.
+The `offset` option allows you to specify how far below, above, to the left, and to the right of the viewport you want Echo to _begin_ loading your images. If you specify `0`, Echo will load your image as soon as it is visible in the viewport, if you want to load _1000px_ below or above the viewport, use `1000`.
+
+#### offsetVertical
+Type: `Number|String` Default: `offset`'s value
+
+The `offsetVertical` option allows you to specify how far above and below the viewport you want Echo to _begin_ loading your images.
+
+#### offsetHorizontal
+Type: `Number|String` Default: `offset`'s value
+
+The `offsetHorizontal` option allows you to specify how far to the left and right of the viewport you want Echo to _begin_ loading your images.
 
 #### offsetTop
-Type: `Number|String` Default: `offset`'s value
+Type: `Number|String` Default: `offsetVertical`'s value
 
 The `offsetTop` option allows you to specify how far above the viewport you want Echo to _begin_ loading your images.
 
-#### offsetBot
-Type: `Number|String` Default: `offset`'s value
+#### offsetBottom
+Type: `Number|String` Default: `offsetVertical`'s value
 
-The `offsetBot` option allows you to specify how far below the viewport you want Echo to _begin_ loading your images.
+The `offsetBottom` option allows you to specify how far below the viewport you want Echo to _begin_ loading your images.
+
+#### offsetLeft
+Type: `Number|String` Default: `offsetVertical`'s value
+
+The `offsetLeft` option allows you to specify how far to left of the viewport you want Echo to _begin_ loading your images.
+
+#### offsetRight
+Type: `Number|String` Default: `offsetVertical`'s value
+
+The `offsetRight` option allows you to specify how far to the right of the viewport you want Echo to _begin_ loading your images.
 
 #### throttle
 Type: `Number|String` Default: `250`
