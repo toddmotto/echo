@@ -123,8 +123,8 @@ window.Echo = (function (global, document, undefined) {
     }
 
     offset = {
-      t: optionToInt(opts.offsetBot, offsetVertical),
-      b: optionToInt(opts.offsetTop, offsetVertical),
+      t: optionToInt(opts.offsetTop, offsetVertical),
+      b: optionToInt(opts.offsetBot, offsetVertical),
       l: optionToInt(opts.offsetLeft, offsetHorizontal),
       r: optionToInt(opts.offsetRight, offsetHorizontal)
     };
