@@ -117,13 +117,17 @@ window.Echo = (function (global, document, undefined) {
     var offsetVertical = opts.offsetVertical || offsetAll;
     var offsetHorizontal = opts.offsetHorizontal || offsetAll;
 
+    function optionToInt(opt, fallback) {
+      return parseInt(opt || fallback, 10);
+    }
+
     offset = {
-      t: parseInt(opts.offsetBot || offsetVertical),
-      b: parseInt(opts.offsetTop || offsetVertical),
-      l: parseInt(opts.offsetLeft || offsetHorizontal),
-      r: parseInt(opts.offsetRight || offsetHorizontal)
+      t: optionToInt(opts.offsetBot, offsetVertical),
+      b: optionToInt(opts.offsetTop, offsetVertical),
+      l: optionToInt(opts.offsetLeft, offsetHorizontal),
+      r: optionToInt(opts.offsetRight, offsetHorizontal)
     };
-    throttle = parseInt(opts.throttle || 250);
+    throttle = optionToInt(opts.throttle, 250);
     unload = !!opts.unload;
     callback = opts.callback || callback;
 
