@@ -32,11 +32,11 @@ window.Echo = (function (global, document, undefined) {
    */
   var _pollImages = function () {
     var src,
-        length,
         i,
         elem,
         view,
-        nodes = [].slice.call(document.querySelectorAll('img[data-echo]'));
+        nodes = document.querySelectorAll('img[data-echo]'),
+        length = nodes.length;
     view = {
       l: 0 - offset.l,
       t: 0 - offset.t,
