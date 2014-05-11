@@ -4,18 +4,6 @@ window.Echo = (function (global, document, undefined) {
   'use strict';
 
   /**
-   * toBeLoaded
-   * @type {Array}
-   */
-  var toBeLoaded = [];
-
-  /**
-   * toBeUnloaded
-   * @type {Array}
-   */
-  var toBeUnloaded = [];
-
-  /**
    * callback - initialized to a no-op so that no validations on it's presence need to be made
    * @type {Function}
    */
@@ -43,48 +31,36 @@ window.Echo = (function (global, document, undefined) {
    * @private
    */
   var _pollImages = function () {
-    var loadingLength = toBeLoaded.length,
-        unloadingLength,
+    var src,
+        length,
         i,
-        self,
-        view;
+        elem,
+        view,
+        nodes = [].slice.call(document.querySelectorAll('img[data-echo]'));
     view = {
       l: 0 - offset.l,
       t: 0 - offset.t,
       b: (window.innerHeight || document.documentElement.clientHeight) + offset.b,
       r: (window.innerWidth || document.documentElement.clientWidth) + offset.r
     };
-    if (loadingLength > 0) {
-      for (i = 0; i < loadingLength; i++) {
-        self = toBeLoaded[i];
-        if (self && _inView(self, view)) {
-          if(unload) {
-            self.setAttribute('data-echo-placeholder', self.src);
-            toBeUnloaded.push(self);
-          }
-          self.src = self.getAttribute('data-echo');
-          callback(self, 'load');
-          toBeLoaded.splice(i, 1);
-          loadingLength = toBeLoaded.length;
-          i--;
+    for(i=0; i<length; i++) {
+      elem = nodes[i];
+      if(_inView(elem, view)) {
+        if(unload) {
+          elem.setAttribute('data-echo-placeholder', elem.src);
         }
+        elem.src = elem.getAttribute('data-echo');
+        if(!unload) {
+          elem.removeAttribute('data-echo');
+        }
+        callback(elem, 'load');
+      } else if(unload && !!(src = elem.getAttribute('data-echo-placeholder'))) {
+        elem.src = src;
+        elem.removeAttribute('data-echo-placeholder');
+        callback(elem, 'unload');
       }
     }
-    unloadingLength = toBeUnloaded.length;
-    if (unloadingLength > 0) {
-      for(i = 0; i < unloadingLength; i++) {
-        self = toBeUnloaded[i];
-        if (self && !_inView(self, view)) {
-          self.src = self.getAttribute('data-echo-placeholder');
-          callback(self, 'unload');
-          toBeUnloaded.splice(i, 1);
-          unloadingLength = toBeUnloaded.length;
-          i--;
-          toBeLoaded.push(self);
-        }
-      }
-    }
-    if(unloadingLength === 0 && loadingLength === 0) {
+    if(!length) {
       detach();
     }
   };
@@ -112,7 +88,6 @@ window.Echo = (function (global, document, undefined) {
    */
   var init = function (opts) {
 
-    var nodes = document.querySelectorAll('img[data-echo]');
     opts = opts || {};
     var offsetAll = opts.offset || 0;
     var offsetVertical = opts.offsetVertical || offsetAll;
@@ -132,12 +107,6 @@ window.Echo = (function (global, document, undefined) {
     unload = !!opts.unload;
     callback = opts.callback || callback;
 
-    toBeLoaded = [];
-    toBeUnloaded = [];
-
-    for (var i = 0; i < nodes.length; i++) {
-      toBeLoaded.push(nodes[i]);
-    }
 
     _pollImages();
 
