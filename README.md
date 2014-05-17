@@ -77,6 +77,11 @@ Type: `Boolean` Default: `false`
 This option will tell echo to unload loaded images once they have scrolled beyond the viewport (including the offset area).
 This option requires the `placeholder` option also be set.
 
+#### debounce
+Type: `Boolean` Default: `true`
+
+By default the throttling function is actually a [debounce](http://underscorejs.org/#debounce) function so that the checking function is only triggered after a user stops scrolling. To use traditional throttling where it will only check the images every `throttle` milliseconds, set `debounce` to `false`.
+
 #### callback
 Type: `Function`
 
