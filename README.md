@@ -75,7 +75,6 @@ The throttle is managed by an internal function that prevents performance issues
 Type: `Boolean` Default: `false`
 
 This option will tell echo to unload loaded images once they have scrolled beyond the viewport (including the offset area).
-This option requires the `placeholder` option also be set.
 
 #### callback
 Type: `Function`
