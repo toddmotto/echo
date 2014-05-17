@@ -9,9 +9,9 @@ window.Echo = (function (global, document, undefined) {
   var callback = function(){};
 
   /**
-   * offset, throttle, poll, unload vars
+   * offset, throttle, poll, unload, debounce vars
    */
-  var offset, throttle, poll, unload;
+  var offset, throttle, poll, unload, debounce;
 
   /**
    *  _inView
@@ -36,6 +36,7 @@ window.Echo = (function (global, document, undefined) {
         view,
         nodes = document.querySelectorAll('img[data-echo]'),
         length = nodes.length;
+    poll = null;
     view = {
       l: 0 - offset.l,
       t: 0 - offset.t,
@@ -69,6 +70,9 @@ window.Echo = (function (global, document, undefined) {
    * @private
    */
   var _throttle = function () {
+    if(!debounce && !!poll) {
+      return;
+    }
     clearTimeout(poll);
     poll = setTimeout(_pollImages, throttle);
   };
@@ -83,6 +87,7 @@ window.Echo = (function (global, document, undefined) {
    * @param {Number|String} [opts.offsetLeft]
    * @param {Number|String} [opts.offsetRight]
    * @param {Boolean} [opts.unload]
+   * @param {Boolean} [opts.debounce]
    * @param {Function} [opts.callback]
    */
   var init = function (opts) {
@@ -104,6 +109,7 @@ window.Echo = (function (global, document, undefined) {
     };
     throttle = optionToInt(opts.throttle, 250);
     unload = !!opts.unload;
+    debounce = opts.debounce !== false;
     callback = opts.callback || callback;
 
 
