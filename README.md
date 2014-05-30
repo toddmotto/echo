@@ -1,6 +1,6 @@
 # Echo [![Build Status](https://travis-ci.org/toddmotto/echo.png)](https://travis-ci.org/toddmotto/echo)
 
-Echo is a standalone JavaScript lazy-loading image tool. Echo is fast, less than 1KB and uses HTML5 data-* attributes. Check out a [demo](http://toddmotto.com/labs/echo). Echo works in IE8+.
+Echo is a standalone JavaScript lazy-loading image micro-library. Echo is fast, 2KB, and uses HTML5 data-* attributes for simple. Check out a [demo](http://toddmotto.com/labs/echo). Echo works in IE8+.
 
 ```
 bower install echojs
@@ -15,19 +15,21 @@ Using Echo.js is simple, just add the image you wish to load to a `data-echo`  a
 
   <script src="dist/echo.js"></script>
   <script>
-  Echo.init({
+  echo.init({
     offset: 100,
     throttle: 250,
     unload: false,
-    callback: function(element, op){ console.log(element, "has been", op+'ed')}
+    callback: function (element, op) {
+      console.log(element, 'has been', op + 'ed')
+    }
   });
 
-  // Echo.render(); is also available for non-scroll callbacks
+  // echo.render(); is also available for non-scroll callbacks
   </script>
 </body>
 ```
 
-## .init() API (options)
+## .init() (options)
 
 The `init()` API takes a few options
 
@@ -83,7 +85,7 @@ Type: `Function`
 The callback will be passed the element that has been updated and what the update operation was (ie `load` or `unload`). This can be useful if you want to add a class like `loaded` to the element. Or do some logging.
 
 ```js
-Echo.init({
+echo.init({
   callback: function(element, op) {
     if(op === 'load') {
       elemend.classList.add('loaded');
@@ -94,16 +96,15 @@ Echo.init({
 });
 ```
 
-
-## .render() API
+## .render()
 
 Echo's callback `render()` can be used to make Echo poll your images when you're not scrolling, for instance if you've got a filter layout that swaps images but does not scroll, you need to call the internal functions without scrolling. Use `render()` for this:
 
 ```js
-Echo.render();
+echo.render();
 ```
 
-Using `render()` is also throttled, which means you can bind it to a `window.onresize` event and it will be optimised for performance in the same way `window.onscroll` is.
+Using `render()` is also throttled, which means you can bind it to an `onresize` event and it will be optimised for performance in the same way `onscroll` is.
 
 ## Manual installation
 Drop your files into your required folders, make sure you're using the file(s) from the `dist` folder, which is the compiled production-ready code. Ensure you place the script before the closing `</body>` tag so the DOM tree is populated when the script runs.
@@ -115,22 +116,8 @@ Add the image that needs to load when it's visible inside the viewport in a `dat
 <img src="img/blank.gif" alt="Photo" data-echo="img/photo.jpg">
 ```
 
-## Scaffolding
-Project files and folder structure.
-
-```
-├── dist/
-│   ├── echo.js
-│   └── echo.min.js
-├── src/
-│   └── echo.js
-├── .editorconfig
-├── .gitignore
-├── .jshintrc
-├── .travis.yml
-├── Gruntfile.js
-└── package.json
-```
+## Contributing
+In lieu of a formal style guide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using Grunt.
 
 ## License
 MIT license
