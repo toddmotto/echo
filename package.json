@@ -17,6 +17,7 @@
     "type": "git",
     "url": "http://github.com/toddmotto/echo.git"
   },
+  "main": "dist/echo.js",
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.7.1",
