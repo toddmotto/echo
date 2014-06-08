@@ -1,34 +1,23 @@
 {
   "name": "echo.js",
   "version": "1.6.0",
-  "homepage": "https://github.com/toddmotto/echo",
-  "author": "Todd Motto",
   "description": "Lazy-loading with data-* attributes, offset and throttle options",
-  "author": {
-    "name": "Todd Motto",
-    "email": "todd@toddmotto.com",
-    "url": "http://toddmotto.com",
-    "github" : "https://github.com/toddmotto"
-  },
-  "licenses": [{
-    "type": "MIT"
-  }],
-  "repository": {
-    "type": "git",
-    "url": "http://github.com/toddmotto/echo.git"
-  },
+  "author": "@toddmotto",
+  "license": "MIT",
+  "homepage": "https://github.com/echo",
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.7.1",
-    "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-uglify": "~0.2.7",
-    "grunt-contrib-connect": "~0.3.0",
-    "grunt-contrib-watch": "~0.4.4",
-    "connect-livereload": "~0.2.0",
-    "grunt-open": "~0.2.0",
-    "matchdep": "~0.1.2"
-  },
-  "peerDependencies": {
-    "grunt-cli": "*"
+    "gulp": "~3.7.0",
+    "gulp-uglify": "~0.3.0",
+    "gulp-rename": "~1.1.0",
+    "gulp-clean": "^0.2.4",
+    "gulp-plumber": "~0.6.2",
+    "gulp-header": "^1.0.2",
+    "gulp-jshint": "^1.6.1",
+    "jshint-stylish": "^0.2.0",
+    "gulp-karma": "0.0.4",
+    "karma": "^0.12.16",
+    "karma-jasmine": "~0.2.0",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "karma-spec-reporter": "0.0.13"
   }
 }

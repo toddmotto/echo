@@ -1,4 +1,4 @@
-/*! echo.js v1.6.0 | (c) 2014 @toddmotto | MIT license | github.com/toddmotto/echo */
+/*! echo.js v1.6.0 | (c) 2014 @toddmotto | https://github.com/echo */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     define(factory);
@@ -11,7 +11,7 @@
 
   'use strict';
 
-  var exports = {};
+  var echo = {};
 
   var callback = function () {};
 
@@ -24,11 +24,11 @@
 
   var debounce = function () {
     clearTimeout(poll);
-    poll = setTimeout(exports.render, throttle);
+    poll = setTimeout(echo.render, throttle);
   };
 
-  exports.init = function (opts) {
-    opts = opts || {};
+  echo.init = function (opts) {
+      opts = opts || {};
     var offsetAll = opts.offset || 0;
     var offsetVertical = opts.offsetVertical || offsetAll;
     var offsetHorizontal = opts.offsetHorizontal || offsetAll;
@@ -44,7 +44,7 @@
     throttle = optionToInt(opts.throttle, 250);
     unload = !!opts.unload;
     callback = opts.callback || callback;
-    exports.render();
+    echo.render();
     if (document.addEventListener) {
       root.addEventListener('scroll', debounce, false);
       root.addEventListener('load', debounce, false);
@@ -54,7 +54,7 @@
     }
   };
 
-  exports.render = function () {
+  echo.render = function () {
     var nodes = document.querySelectorAll('img[data-echo]');
     var length = nodes.length;
     var src, elem;
@@ -82,11 +82,11 @@
       }
     }
     if (!length) {
-      exports.detach();
+      echo.detach();
     }
   };
 
-  exports.detach = function () {
+  echo.detach = function () {
     if (document.removeEventListener) {
       root.removeEventListener('scroll', debounce);
     } else {
@@ -95,6 +95,6 @@
     clearTimeout(poll);
   };
 
-  return exports;
+  return echo;
 
 });

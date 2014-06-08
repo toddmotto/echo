@@ -116,7 +116,7 @@ Add the image that needs to load when it's visible inside the viewport in a `dat
 ```
 
 ## Contributing
-In lieu of a formal style guide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using Grunt.
+In lieu of a formal style guide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using Gulp.
 
 ## License
 MIT license
