@@ -1,4 +1,4 @@
-# Echo [![Build Status](https://travis-ci.org/toddmotto/echo.png)](https://travis-ci.org/toddmotto/echo)
+# Echo.js [![Build Status](https://travis-ci.org/toddmotto/echo.svg)](https://travis-ci.org/toddmotto/echo)
 
 Echo is a standalone JavaScript lazy-loading image micro-library. Echo is fast, 2KB, and uses HTML5 data-* attributes for simple. Check out a [demo](http://toddmotto.com/labs/echo). Echo works in IE8+.
 
