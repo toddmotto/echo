@@ -1,4 +1,4 @@
-/*! echo.js v1.6.0 | (c) 2014 @toddmotto | https://github.com/echo */
+/*! echo.js v1.6.0 | (c) 2014 @toddmotto | https://github.com/toddmotto/echo */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     define(factory);
@@ -28,7 +28,7 @@
   };
 
   echo.init = function (opts) {
-      opts = opts || {};
+    opts = opts || {};
     var offsetAll = opts.offset || 0;
     var offsetVertical = opts.offsetVertical || offsetAll;
     var offsetHorizontal = opts.offsetHorizontal || offsetAll;

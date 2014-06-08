@@ -4,7 +4,7 @@
   "description": "Lazy-loading with data-* attributes, offset and throttle options",
   "author": "@toddmotto",
   "license": "MIT",
-  "homepage": "https://github.com/echo",
+  "homepage": "https://github.com/toddmotto/echo",
   "devDependencies": {
     "gulp": "~3.7.0",
     "gulp-uglify": "~0.3.0",
