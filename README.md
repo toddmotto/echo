@@ -73,6 +73,11 @@ Type: `Number|String` Default: `250`
 
 The throttle is managed by an internal function that prevents performance issues from continuous firing of `window.onscroll` events. Using a throttle will set a small timeout when the user scrolls and will keep throttling until the user stops. The default is `250` milliseconds.
 
+#### debounce
+Type: `Boolean` Default: `true`
+
+By default the throttling function is actually a [debounce](http://underscorejs.org/#debounce) function so that the checking function is only triggered after a user stops scrolling. To use traditional throttling where it will only check the images every `throttle` milliseconds, set `debounce` to `false`.
+
 #### unload
 Type: `Boolean` Default: `false`
 
