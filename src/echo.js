@@ -1,6 +1,8 @@
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
-    define(factory);
+    define(function() {
+      return factory(root)
+    });
   } else if (typeof exports === 'object') {
     module.exports = factory;
   } else {
