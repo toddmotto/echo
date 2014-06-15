@@ -1,7 +1,7 @@
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     define(function() {
-      return factory(root)
+      return factory(root);
     });
   } else if (typeof exports === 'object') {
     module.exports = factory;
@@ -20,7 +20,8 @@
 
   var inView = function (element, view) {
     var box = element.getBoundingClientRect();
-    return (box.right >= view.l && box.bottom >= view.t && box.left <= view.r && box.top <= view.b);
+    var isVisible = element.offsetWidth > 0 || element.offsetHeight > 0;
+    return isVisible && (box.right >= view.l && box.bottom >= view.t && box.left <= view.r && box.top <= view.b);
   };
 
   var debounce = function () {
