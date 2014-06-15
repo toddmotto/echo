@@ -1,7 +1,9 @@
 /*! echo.js v1.6.0 | (c) 2014 @toddmotto | https://github.com/toddmotto/echo */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
-    define(factory);
+    define(function() {
+      return factory(root);
+    });
   } else if (typeof exports === 'object') {
     module.exports = factory;
   } else {
@@ -19,7 +21,8 @@
 
   var inView = function (element, view) {
     var box = element.getBoundingClientRect();
-    return (box.right >= view.l && box.bottom >= view.t && box.left <= view.r && box.top <= view.b);
+    var isVisible = element.offsetWidth > 0 || element.offsetHeight > 0;
+    return isVisible && (box.right >= view.l && box.bottom >= view.t && box.left <= view.r && box.top <= view.b);
   };
 
   var debounce = function () {
