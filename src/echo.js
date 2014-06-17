@@ -1,7 +1,7 @@
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     define(function() {
-      return factory(root)
+      return factory(root);
     });
   } else if (typeof exports === 'object') {
     module.exports = factory;
@@ -16,16 +16,22 @@
 
   var callback = function () {};
 
-  var offset, poll, throttle, unload;
+  var offset, poll, delay, useDebounce, unload;
 
   var inView = function (element, view) {
     var box = element.getBoundingClientRect();
     return (box.right >= view.l && box.bottom >= view.t && box.left <= view.r && box.top <= view.b);
   };
 
-  var debounce = function () {
+  var debounceOrThrottle = function () {
+    if(!useDebounce && !!poll) {
+      return;
+    }
     clearTimeout(poll);
-    poll = setTimeout(echo.render, throttle);
+    poll = setTimeout(function(){
+      echo.render();
+      poll = null;
+    }, delay);
   };
 
   echo.init = function (opts) {
@@ -42,16 +48,17 @@
       l: optionToInt(opts.offsetLeft, offsetHorizontal),
       r: optionToInt(opts.offsetRight, offsetHorizontal)
     };
-    throttle = optionToInt(opts.throttle, 250);
+    delay = optionToInt(opts.throttle, 250);
+    useDebounce = opts.debounce !== false;
     unload = !!opts.unload;
     callback = opts.callback || callback;
     echo.render();
     if (document.addEventListener) {
-      root.addEventListener('scroll', debounce, false);
-      root.addEventListener('load', debounce, false);
+      root.addEventListener('scroll', debounceOrThrottle, false);
+      root.addEventListener('load', debounceOrThrottle, false);
     } else {
-      root.attachEvent('onscroll', debounce);
-      root.attachEvent('onload', debounce);
+      root.attachEvent('onscroll', debounceOrThrottle);
+      root.attachEvent('onload', debounceOrThrottle);
     }
   };
 
@@ -89,9 +96,9 @@
 
   echo.detach = function () {
     if (document.removeEventListener) {
-      root.removeEventListener('scroll', debounce);
+      root.removeEventListener('scroll', debounceOrThrottle);
     } else {
-      root.detachEvent('onscroll', debounce);
+      root.detachEvent('onscroll', debounceOrThrottle);
     }
     clearTimeout(poll);
   };
