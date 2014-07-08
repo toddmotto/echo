@@ -66,7 +66,7 @@
   echo.render = function () {
     var nodes = document.querySelectorAll('img[data-echo]');
     var length = nodes.length;
-    var src, elem;
+    var src, elem, loaded;
     var view = {
       l: 0 - offset.l,
       t: 0 - offset.t,
@@ -76,14 +76,17 @@
     for (var i = 0; i < length; i++) {
       elem = nodes[i];
       if (inView(elem, view)) {
-        if (unload) {
-          elem.setAttribute('data-echo-placeholder', elem.src);
+        loaded = (elem.src === elem.getAttribute('data-echo'));
+        if (!loaded) {
+            if (unload) {
+              elem.setAttribute('data-echo-placeholder', elem.src);
+            }
+            elem.src = elem.getAttribute('data-echo');
+            if (!unload) {
+                elem.removeAttribute('data-echo');
+            }
+            callback(elem, 'load');
         }
-        elem.src = elem.getAttribute('data-echo');
-        if (!unload) {
-          elem.removeAttribute('data-echo');
-        }
-        callback(elem, 'load');
       } else if (unload && !!(src = elem.getAttribute('data-echo-placeholder'))) {
         elem.src = src;
         elem.removeAttribute('data-echo-placeholder');
