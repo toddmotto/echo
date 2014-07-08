@@ -83,6 +83,11 @@ Type: `Boolean` Default: `false`
 
 This option will tell echo to unload loaded images once they have scrolled beyond the viewport (including the offset area).
 
+#### autoDetach
+Type: `Boolean` Default: `true`
+
+By default Echo shuts itself down once there are no more images to be loaded (no matches in the current DOM). Set this to `false` to allow persistent background polling. This could be useful when working with filtered/paged collections if you do not wish to call `init` on each change (just call `render` if necessary).
+
 #### callback
 Type: `Function`
 

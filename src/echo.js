@@ -16,7 +16,7 @@
 
   var callback = function () {};
 
-  var offset, poll, delay, useDebounce, unload;
+  var offset, poll, delay, useDebounce, unload, autoDetach;
 
   var inView = function (element, view) {
     var box = element.getBoundingClientRect();
@@ -51,6 +51,7 @@
     delay = optionToInt(opts.throttle, 250);
     useDebounce = opts.debounce !== false;
     unload = !!opts.unload;
+    autoDetach = opts.autoDetach !== false;
     callback = opts.callback || callback;
     echo.render();
     if (document.addEventListener) {
@@ -89,7 +90,7 @@
         callback(elem, 'unload');
       }
     }
-    if (!length) {
+    if (autoDetach && !length) {
       echo.detach();
     }
   };
