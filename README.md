@@ -92,9 +92,9 @@ The callback will be passed the element that has been updated and what the updat
 echo.init({
   callback: function(element, op) {
     if(op === 'load') {
-      elemend.classList.add('loaded');
+      element.classList.add('loaded');
     } else {
-      elemend.classList.remove('loaded');
+      element.classList.remove('loaded');
     }
   }
 });
