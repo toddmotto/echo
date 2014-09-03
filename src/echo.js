@@ -55,11 +55,11 @@
     container = opts.container || root;
     echo.render();
     if (document.addEventListener) {
-      root.addEventListener('scroll', debounceOrThrottle, false);
-      root.addEventListener('load', debounceOrThrottle, false);
+      container.addEventListener('scroll', debounceOrThrottle, false);
+      container.addEventListener('load', debounceOrThrottle, false);
     } else {
-      root.attachEvent('onscroll', debounceOrThrottle);
-      root.attachEvent('onload', debounceOrThrottle);
+      container.attachEvent('onscroll', debounceOrThrottle);
+      container.attachEvent('onload', debounceOrThrottle);
     }
   };
 
