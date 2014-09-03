@@ -99,6 +99,16 @@ echo.init({
   }
 });
 ```
+#### container
+Type: `Object` Default: `null`
+
+This allows you to specify a different container of the defaut 'document'.
+
+```js
+echo.init({
+  container: document.querySelector(".main")
+});
+```
 
 ## .render()
 
