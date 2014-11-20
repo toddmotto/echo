@@ -64,7 +64,7 @@
   };
 
   echo.render = function () {
-    var nodes = document.querySelectorAll('img[data-echo]');
+    var nodes = document.querySelectorAll('img[data-echo], [data-echo-background]');
     var length = nodes.length;
     var src, elem;
     var view = {
@@ -76,16 +76,33 @@
     for (var i = 0; i < length; i++) {
       elem = nodes[i];
       if (inView(elem, view)) {
+
         if (unload) {
           elem.setAttribute('data-echo-placeholder', elem.src);
         }
-        elem.src = elem.getAttribute('data-echo');
+
+        if (elem.getAttribute('data-echo-background') !== null) {
+          elem.style.backgroundImage = "url(" + elem.getAttribute('data-echo-background') + ")";
+        }
+        else {
+          elem.src = elem.getAttribute('data-echo');
+        }
+
         if (!unload) {
           elem.removeAttribute('data-echo');
         }
+
         callback(elem, 'load');
-      } else if (unload && !!(src = elem.getAttribute('data-echo-placeholder'))) {
-        elem.src = src;
+      }
+      else if (unload && !!(src = elem.getAttribute('data-echo-placeholder'))) {
+
+        if (elem.getAttribute('data-echo-background') !== null) {
+          elem.style.backgroundImage = "url(" + src + ")";
+        }
+        else {
+          elem.src = src;
+        }
+
         elem.removeAttribute('data-echo-placeholder');
         callback(elem, 'unload');
       }
