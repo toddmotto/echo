@@ -75,7 +75,7 @@
     for (var i = 0; i < length; i++) {
       elem = nodes[i];
       if (inView(elem, view)) {
-        if (unload) {
+        if (unload && !(src = elem.getAttribute('data-echo-placeholder'))) {
           elem.setAttribute('data-echo-placeholder', elem.src);
         }
         elem.src = elem.getAttribute('data-echo');
