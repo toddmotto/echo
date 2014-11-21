@@ -16,7 +16,7 @@
 
   var callback = function () {};
 
-  var offset, poll, delay, useDebounce, unload;
+  var offset, poll, delay, useDebounce, unload, container;
 
   var inView = function (element, view) {
     var box = element.getBoundingClientRect();
@@ -52,13 +52,14 @@
     useDebounce = opts.debounce !== false;
     unload = !!opts.unload;
     callback = opts.callback || callback;
+    container = opts.container || root;
     echo.render();
     if (document.addEventListener) {
-      root.addEventListener('scroll', debounceOrThrottle, false);
-      root.addEventListener('load', debounceOrThrottle, false);
+      container.addEventListener('scroll', debounceOrThrottle, false);
+      container.addEventListener('load', debounceOrThrottle, false);
     } else {
-      root.attachEvent('onscroll', debounceOrThrottle);
-      root.attachEvent('onload', debounceOrThrottle);
+      container.attachEvent('onscroll', debounceOrThrottle);
+      container.attachEvent('onload', debounceOrThrottle);
     }
   };
 
@@ -69,8 +70,8 @@
     var view = {
       l: 0 - offset.l,
       t: 0 - offset.t,
-      b: (root.innerHeight || document.documentElement.clientHeight) + offset.b,
-      r: (root.innerWidth || document.documentElement.clientWidth) + offset.r
+      b: (container.innerHeight || container.clientHeight) + offset.b,
+      r: (container.innerWidth || container.clientWidth) + offset.r
     };
     for (var i = 0; i < length; i++) {
       elem = nodes[i];
