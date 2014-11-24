@@ -6,7 +6,7 @@ Echo is a standalone JavaScript lazy-loading image micro-library. Echo is fast, 
 bower install echojs
 ```
 
-Using Echo.js is simple, just add the image you wish to load to a `data-echo`  attribute.
+Using Echo.js is simple, to add an image directly into the page simply add a `data-echo` attribute to the img tag. Alternatively if you want to use Echo to lazy load background images simply add a `data-echo-background' attribute to the element with the image URL.
 
 ```html
 <body>
