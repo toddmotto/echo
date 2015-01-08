@@ -89,6 +89,7 @@
 
         if (!unload) {
           elem.removeAttribute('data-echo');
+          elem.removeAttribute('data-echo-background');
         }
 
         callback(elem, 'load');
