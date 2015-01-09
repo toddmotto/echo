@@ -1,6 +1,6 @@
 {
   "name": "echo.js",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Lazy-loading with data-* attributes, offset and throttle options",
   "author": "@toddmotto",
   "license": "MIT",
