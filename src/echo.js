@@ -20,7 +20,7 @@
 
   var isHidden = function (element) {
     return (element.offsetParent === null);
-  }
+  };
   
   var inView = function (element, view) {
     if (isHidden(element)) {
