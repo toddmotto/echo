@@ -1,4 +1,4 @@
-/*! echo.js v1.6.0 | (c) 2015 @toddmotto | https://github.com/toddmotto/echo */
+/*! echo.js v1.7.0 | (c) 2015 @toddmotto | https://github.com/toddmotto/echo */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     define(function() {
@@ -19,7 +19,15 @@
 
   var offset, poll, delay, useDebounce, unload;
 
+  var isHidden = function (element) {
+    return (element.offsetParent === null);
+  };
+  
   var inView = function (element, view) {
+    if (isHidden(element)) {
+      return false;
+    }
+
     var box = element.getBoundingClientRect();
     return (box.right >= view.l && box.bottom >= view.t && box.left <= view.r && box.top <= view.b);
   };
@@ -90,6 +98,7 @@
 
         if (!unload) {
           elem.removeAttribute('data-echo');
+          elem.removeAttribute('data-echo-background');
         }
 
         callback(elem, 'load');

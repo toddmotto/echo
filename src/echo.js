@@ -18,7 +18,15 @@
 
   var offset, poll, delay, useDebounce, unload;
 
+  var isHidden = function (element) {
+    return (element.offsetParent === null);
+  };
+  
   var inView = function (element, view) {
+    if (isHidden(element)) {
+      return false;
+    }
+
     var box = element.getBoundingClientRect();
     return (box.right >= view.l && box.bottom >= view.t && box.left <= view.r && box.top <= view.b);
   };
