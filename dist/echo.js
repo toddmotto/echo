@@ -1,5 +1,4 @@
-/*! echo.js v1.7.0 | (c) 2015 @toddmotto | https://github.com/toddmotto/echo */
-(function (root, factory) {
+(function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     define(function() {
       return factory(root);
@@ -9,21 +8,21 @@
   } else {
     root.echo = factory(root);
   }
-})(this, function (root) {
+})(this, function(root) {
 
   'use strict';
 
   var echo = {};
 
-  var callback = function () {};
+  var callback = function() {};
 
   var offset, poll, delay, useDebounce, unload;
 
-  var isHidden = function (element) {
+  var isHidden = function(element) {
     return (element.offsetParent === null);
   };
-  
-  var inView = function (element, view) {
+
+  var inView = function(element, view) {
     if (isHidden(element)) {
       return false;
     }
@@ -32,23 +31,23 @@
     return (box.right >= view.l && box.bottom >= view.t && box.left <= view.r && box.top <= view.b);
   };
 
-  var debounceOrThrottle = function () {
-    if(!useDebounce && !!poll) {
+  var debounceOrThrottle = function() {
+    if (!useDebounce && !!poll) {
       return;
     }
     clearTimeout(poll);
-    poll = setTimeout(function(){
+    poll = setTimeout(function() {
       echo.render();
       poll = null;
     }, delay);
   };
 
-  echo.init = function (opts) {
+  echo.init = function(opts) {
     opts = opts || {};
     var offsetAll = opts.offset || 0;
     var offsetVertical = opts.offsetVertical || offsetAll;
     var offsetHorizontal = opts.offsetHorizontal || offsetAll;
-    var optionToInt = function (opt, fallback) {
+    var optionToInt = function(opt, fallback) {
       return parseInt(opt || fallback, 10);
     };
     offset = {
@@ -71,7 +70,7 @@
     }
   };
 
-  echo.render = function () {
+  echo.render = function() {
     var nodes = document.querySelectorAll('img[data-echo], [data-echo-background]');
     var length = nodes.length;
     var src, elem;
@@ -89,12 +88,8 @@
           elem.setAttribute('data-echo-placeholder', elem.src);
         }
 
-        if (elem.getAttribute('data-echo-background') !== null) {
-          elem.style.backgroundImage = "url(" + elem.getAttribute('data-echo-background') + ")";
-        }
-        else {
-          elem.src = elem.getAttribute('data-echo');
-        }
+
+        elem.src = elem.getAttribute('data-echo');
 
         if (!unload) {
           elem.removeAttribute('data-echo');
@@ -102,18 +97,20 @@
         }
 
         callback(elem, 'load');
-      }
-      else if (unload && !!(src = elem.getAttribute('data-echo-placeholder'))) {
+      } else if (unload && !!(src = elem.getAttribute('data-echo-placeholder'))) {
 
         if (elem.getAttribute('data-echo-background') !== null) {
           elem.style.backgroundImage = "url(" + src + ")";
-        }
-        else {
+        } else {
           elem.src = src;
         }
 
         elem.removeAttribute('data-echo-placeholder');
         callback(elem, 'unload');
+      }
+      if (elem.getAttribute('data-echo-background') !== null) {
+        elem.style.backgroundImage = "url(" + elem.getAttribute('data-echo-background') + ")";
+        callback(elem,elem.getAttribute('data-echo-background'));
       }
     }
     if (!length) {
@@ -121,7 +118,7 @@
     }
   };
 
-  echo.detach = function () {
+  echo.detach = function() {
     if (document.removeEventListener) {
       root.removeEventListener('scroll', debounceOrThrottle);
     } else {
