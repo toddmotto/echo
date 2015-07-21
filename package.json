@@ -1,6 +1,6 @@
 {
   "name": "echo-js",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "description": "Lazy-loading with data-* attributes, offset and throttle options",
   "author": "@toddmotto",
   "license": "MIT",
@@ -20,7 +20,5 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "karma-spec-reporter": "0.0.13"
   },
-  "spm": {
-    "main": "src/echo.js"
-  }
+  "main": "src/echo.js"
 }
