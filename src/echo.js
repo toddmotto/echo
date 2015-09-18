@@ -71,7 +71,7 @@
   };
 
   echo.render = function () {
-    var nodes = document.querySelectorAll('img[data-echo], [data-echo-background]');
+    var nodes = document.querySelectorAll('[data-echo], [data-echo-background]');
     var length = nodes.length;
     var src, elem;
     var view = {
