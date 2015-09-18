@@ -70,8 +70,8 @@
     }
   };
 
-  echo.render = function () {
-    var nodes = document.querySelectorAll('[data-echo], [data-echo-background]');
+  echo.render = function (context) {
+    var nodes = (context || document).querySelectorAll('[data-echo], [data-echo-background]');
     var length = nodes.length;
     var src, elem;
     var view = {
