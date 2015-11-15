@@ -1,0 +1,22 @@
+{
+  "name": "echojs",
+  "version": "1.7.3",
+  "homepage": "https://github.com/toddmotto/echo",
+  "authors": [
+    "@toddmotto"
+  ],
+  "description": "Lazy-loading with data-* attributes, offset and throttle options",
+  "main": "src/echo.js",
+  "moduleType": [],
+  "keywords": [
+    "echo"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
