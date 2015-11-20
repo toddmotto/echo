@@ -49,7 +49,7 @@
     var offsetVertical = opts.offsetVertical || offsetAll;
     var offsetHorizontal = opts.offsetHorizontal || offsetAll;
     var optionToInt = function (opt, fallback) {
-      return parseInt(opt || fallback, 10);
+      return parseInt(opt || fallback);
     };
     offset = {
       t: optionToInt(opts.offsetTop, offsetVertical),
