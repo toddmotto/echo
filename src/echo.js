@@ -23,7 +23,8 @@
   };
   
   var inView = function (element, view) {
-    if (isHidden(element)) {
+    var style = getComputedStyle(element);
+    if (isHidden(element) && style.position != 'fixed') {
       return false;
     }
 
