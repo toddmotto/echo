@@ -16,12 +16,14 @@
 
   var callback = function () {};
 
+  var selector = 'img[data-echo], [data-echo-background]';
+
   var offset, poll, delay, useDebounce, unload;
 
   var isHidden = function (element) {
     return (element.offsetParent === null);
   };
-  
+
   var inView = function (element, view) {
     if (isHidden(element)) {
       return false;
@@ -50,6 +52,7 @@
     var optionToInt = function (opt, fallback) {
       return parseInt(opt || fallback, 10);
     };
+    selector = opts.selector || selector;
     offset = {
       t: optionToInt(opts.offsetTop, offsetVertical),
       b: optionToInt(opts.offsetBottom, offsetVertical),
@@ -71,7 +74,7 @@
   };
 
   echo.render = function () {
-    var nodes = document.querySelectorAll('img[data-echo], [data-echo-background]');
+    var nodes = document.querySelectorAll(selector);
     var length = nodes.length;
     var src, elem;
     var view = {
