@@ -1,14 +1,14 @@
-(function (root, factory) {
+(function (window, factory) {
   if (typeof define === 'function' && define.amd) {
     define(function() {
-      return factory(root);
+      return factory();
     });
   } else if (typeof exports === 'object') {
     module.exports = factory;
   } else {
-    root.echo = factory(root);
+    window.echo = factory();
   }
-})(this, function (root) {
+})(window, function () {
 
   'use strict';
 
@@ -16,7 +16,7 @@
 
   var callback = function () {};
 
-  var offset, poll, delay, useDebounce, unload;
+  var offset, poll, delay, useDebounce, unload, container, scrollListenElement;
 
   var isHidden = function (element) {
     return (element.offsetParent === null);
@@ -50,6 +50,9 @@
     var optionToInt = function (opt, fallback) {
       return parseInt(opt || fallback, 10);
     };
+    var bodyElement=document.body;
+    container = opts.container || bodyElement;
+    scrollListenElement = (container!==bodyElement) ? container : window;
     offset = {
       t: optionToInt(opts.offsetTop, offsetVertical),
       b: optionToInt(opts.offsetBottom, offsetVertical),
@@ -62,11 +65,15 @@
     callback = opts.callback || callback;
     echo.render();
     if (document.addEventListener) {
-      root.addEventListener('scroll', debounceOrThrottle, false);
-      root.addEventListener('load', debounceOrThrottle, false);
+      /*root.addEventListener('scroll', debounceOrThrottle, false);
+      root.addEventListener('load', debounceOrThrottle, false);*/
+      scrollListenElement.addEventListener('scroll', debounceOrThrottle, false);
+      window.addEventListener('load', debounceOrThrottle, false);
     } else {
-      root.attachEvent('onscroll', debounceOrThrottle);
-      root.attachEvent('onload', debounceOrThrottle);
+      /*root.attachEvent('onscroll', debounceOrThrottle);
+      root.attachEvent('onload', debounceOrThrottle);*/
+      scrollListenElement.attachEvent('onscroll', debounceOrThrottle);
+      window.attachEvent('onload', debounceOrThrottle);
     }
   };
 
@@ -77,13 +84,15 @@
     var view = {
       l: 0 - offset.l,
       t: 0 - offset.t,
-      b: (root.innerHeight || document.documentElement.clientHeight) + offset.b,
-      r: (root.innerWidth || document.documentElement.clientWidth) + offset.r
+      /*b: (root.innerHeight || document.documentElement.clientHeight) + offset.b,
+      r: (root.innerWidth || document.documentElement.clientWidth) + offset.r*/
+      b: container.clientHeight + offset.b,
+      r: container.clientWidth + offset.r
     };
     for (var i = 0; i < length; i++) {
       elem = nodes[i];
       if (inView(elem, view)) {
-
+        
         if (unload) {
           elem.setAttribute('data-echo-placeholder', elem.src);
         }
@@ -122,9 +131,11 @@
 
   echo.detach = function () {
     if (document.removeEventListener) {
-      root.removeEventListener('scroll', debounceOrThrottle);
+      /*root.removeEventListener('scroll', debounceOrThrottle);*/
+      window.removeEventListener('scroll', debounceOrThrottle);
     } else {
-      root.detachEvent('onscroll', debounceOrThrottle);
+      /*root.detachEvent('onscroll', debounceOrThrottle);*/
+      window.detachEvent('onscroll', debounceOrThrottle);
     }
     clearTimeout(poll);
   };
