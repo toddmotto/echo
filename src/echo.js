@@ -89,7 +89,7 @@
         }
 
         if (elem.getAttribute('data-echo-background') !== null) {
-          elem.style.backgroundImage = "url(" + elem.getAttribute('data-echo-background') + ")";
+          elem.style.backgroundImage = 'url(' + elem.getAttribute('data-echo-background') + ')';
         }
         else if (elem.src !== (src = elem.getAttribute('data-echo'))) {
           elem.src = src;
@@ -105,7 +105,7 @@
       else if (unload && !!(src = elem.getAttribute('data-echo-placeholder'))) {
 
         if (elem.getAttribute('data-echo-background') !== null) {
-          elem.style.backgroundImage = "url(" + src + ")";
+          elem.style.backgroundImage = 'url(' + src + ')';
         }
         else {
           elem.src = src;
