@@ -71,8 +71,8 @@
     }
   };
 
-  echo.render = function () {
-    var nodes = document.querySelectorAll('img[data-echo], [data-echo-background]');
+  echo.render = function (context) {
+    var nodes = (context || document).querySelectorAll('[data-echo], [data-echo-background]');
     var length = nodes.length;
     var src, elem;
     var view = {
@@ -90,10 +90,10 @@
         }
 
         if (elem.getAttribute('data-echo-background') !== null) {
-          elem.style.backgroundImage = "url(" + elem.getAttribute('data-echo-background') + ")";
+          elem.style.backgroundImage = 'url(' + elem.getAttribute('data-echo-background') + ')';
         }
-        else {
-          elem.src = elem.getAttribute('data-echo');
+        else if (elem.src !== (src = elem.getAttribute('data-echo'))) {
+          elem.src = src;
         }
 
         if (!unload) {
@@ -106,7 +106,7 @@
       else if (unload && !!(src = elem.getAttribute('data-echo-placeholder'))) {
 
         if (elem.getAttribute('data-echo-background') !== null) {
-          elem.style.backgroundImage = "url(" + src + ")";
+          elem.style.backgroundImage = 'url(' + src + ')';
         }
         else {
           elem.src = src;
