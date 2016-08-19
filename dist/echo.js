@@ -61,7 +61,10 @@
     useDebounce = opts.debounce !== false;
     unload = !!opts.unload;
     callback = opts.callback || callback;
-    echo.render();
+
+    //note by Alon Zhang | zhangjinlong3546@sina.com
+    //repeatedly render, debounceOrThrottle function has called render
+    // echo.render();
     if (document.addEventListener) {
       root.addEventListener('scroll', debounceOrThrottle, false);
       root.addEventListener('load', debounceOrThrottle, false);
@@ -86,7 +89,11 @@
       if (inView(elem, view)) {
 
         if (unload) {
-          elem.setAttribute('data-echo-placeholder', elem.src);
+          //add by Alon Zhang | zhangjinlong3546@sina.com
+          //Only the first time, storage placeholder picture
+          if(!elem.getAttribute('data-echo-placeholder')){
+            elem.setAttribute('data-echo-placeholder', elem.src);
+          }
         }
 
         if (elem.getAttribute('data-echo-background') !== null) {
