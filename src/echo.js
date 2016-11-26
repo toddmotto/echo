@@ -8,7 +8,7 @@
   } else {
     root.echo = factory(root);
   }
-})(this, function (root) {
+})(window, function (root) {
 
   'use strict';
 
