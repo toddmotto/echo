@@ -83,7 +83,8 @@
     for (var i = 0; i < length; i++) {
       elem = nodes[i];
       if (inView(elem, view)) {
-
+        let randomClass = 'echo-img-' + Math.random().toString().split('.')[1];
+        $(elem).addClass(randomClass);
         if (unload) {
           elem.setAttribute('data-echo-placeholder', elem.src);
         }
@@ -94,10 +95,12 @@
           let clonedNode = $(elem).clone();
           clonedNode.data('echo-lazy-img-class', randomClass);
           clonedNode.addClass('hidden');
+          let dataEcho = elem.getAttribute('data-echo');
+          clonedNode.attr('src', dataEcho);
           clonedNode.on('load', function() {
-            $('.' + clonedNode.data('echo-lazy-img-class'))[0].src = elem.getAttribute('data-lazy-echo');
+            $('.' + clonedNode.data('echo-lazy-img-class'))[0].src = dataEcho;
           });
-          clonedNode.append($(elem.parentNode));
+          $(elem.parentNode).append(clonedNode);
         }
 
         if (!unload) {
