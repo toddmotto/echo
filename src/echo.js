@@ -1,4 +1,4 @@
-(function (root, factory) {
+(function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     define(function() {
       return factory(root);
@@ -8,21 +8,21 @@
   } else {
     root.echo = factory(root);
   }
-})(this, function (root) {
+})(this, function(root) {
 
   'use strict';
 
   var echo = {};
 
-  var callback = function () {};
+  var callback = function() {};
 
   var offset, poll, delay, useDebounce, unload;
 
-  var isHidden = function (element) {
+  var isHidden = function(element) {
     return (element.offsetParent === null);
   };
-  
-  var inView = function (element, view) {
+
+  var inView = function(element, view) {
     if (isHidden(element)) {
       return false;
     }
@@ -31,23 +31,23 @@
     return (box.right >= view.l && box.bottom >= view.t && box.left <= view.r && box.top <= view.b);
   };
 
-  var debounceOrThrottle = function () {
-    if(!useDebounce && !!poll) {
+  var debounceOrThrottle = function() {
+    if (!useDebounce && !!poll) {
       return;
     }
     clearTimeout(poll);
-    poll = setTimeout(function(){
+    poll = setTimeout(function() {
       echo.render();
       poll = null;
     }, delay);
   };
 
-  echo.init = function (opts) {
+  echo.init = function(opts) {
     opts = opts || {};
     var offsetAll = opts.offset || 0;
     var offsetVertical = opts.offsetVertical || offsetAll;
     var offsetHorizontal = opts.offsetHorizontal || offsetAll;
-    var optionToInt = function (opt, fallback) {
+    var optionToInt = function(opt, fallback) {
       return parseInt(opt || fallback, 10);
     };
     offset = {
@@ -70,7 +70,7 @@
     }
   };
 
-  echo.render = function (context) {
+  echo.render = function(context) {
     var nodes = (context || document).querySelectorAll('[data-echo], [data-echo-background]');
     var length = nodes.length;
     var src, elem;
@@ -90,9 +90,14 @@
 
         if (elem.getAttribute('data-echo-background') !== null) {
           elem.style.backgroundImage = 'url(' + elem.getAttribute('data-echo-background') + ')';
-        }
-        else if (elem.src !== (src = elem.getAttribute('data-echo'))) {
-          elem.src = src;
+        } else if (elem.src !== (src = elem.getAttribute('data-echo'))) {
+          let clonedNode = $(elem).clone();
+          clonedNode.data('echo-lazy-img-class', randomClass);
+          clonedNode.addClass('hidden');
+          clonedNode.on('load', function() {
+            $('.' + clonedNode.data('echo-lazy-img-class'))[0].src = elem.getAttribute('data-lazy-echo');
+          });
+          clonedNode.append($(elem.parentNode));
         }
 
         if (!unload) {
@@ -101,13 +106,11 @@
         }
 
         callback(elem, 'load');
-      }
-      else if (unload && !!(src = elem.getAttribute('data-echo-placeholder'))) {
+      } else if (unload && !!(src = elem.getAttribute('data-echo-placeholder'))) {
 
         if (elem.getAttribute('data-echo-background') !== null) {
           elem.style.backgroundImage = 'url(' + src + ')';
-        }
-        else {
+        } else {
           elem.src = src;
         }
 
@@ -120,7 +123,7 @@
     }
   };
 
-  echo.detach = function () {
+  echo.detach = function() {
     if (document.removeEventListener) {
       root.removeEventListener('scroll', debounceOrThrottle);
     } else {
