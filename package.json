@@ -20,5 +20,13 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "karma-spec-reporter": "0.0.13"
   },
-  "main": "src/echo.js"
+  "main": "src/echo.js",
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true,
+  "dependencies": {
+    "snyk": "^1.316.1"
+  }
 }
