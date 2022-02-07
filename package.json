@@ -15,7 +15,7 @@
     "gulp-jshint": "^1.6.1",
     "jshint-stylish": "^0.2.0",
     "gulp-karma": "0.0.4",
-    "karma": "^0.12.16",
+    "karma": "^6.3.14",
     "karma-jasmine": "~0.2.0",
     "karma-phantomjs-launcher": "^0.1.4",
     "karma-spec-reporter": "0.0.13"
