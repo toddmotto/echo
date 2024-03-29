@@ -6,7 +6,7 @@
   "license": "MIT",
   "homepage": "https://github.com/toddmotto/echo",
   "devDependencies": {
-    "gulp": "~3.7.0",
+    "gulp": "~5.0.0",
     "gulp-uglify": "~0.3.0",
     "gulp-rename": "~1.1.0",
     "gulp-clean": "^0.2.4",
