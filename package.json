@@ -7,7 +7,7 @@
   "homepage": "https://github.com/toddmotto/echo",
   "devDependencies": {
     "gulp": "~3.7.0",
-    "gulp-uglify": "~0.3.0",
+    "gulp-uglify": "~2.1.0",
     "gulp-rename": "~1.1.0",
     "gulp-clean": "^0.2.4",
     "gulp-plumber": "~0.6.2",
@@ -15,9 +15,9 @@
     "gulp-jshint": "^1.6.1",
     "jshint-stylish": "^0.2.0",
     "gulp-karma": "0.0.4",
-    "karma": "^0.12.16",
+    "karma": "^0.13.0",
     "karma-jasmine": "~0.2.0",
-    "karma-phantomjs-launcher": "^0.1.4",
+    "karma-phantomjs-launcher": "^1.0.4",
     "karma-spec-reporter": "0.0.13"
   },
   "main": "src/echo.js"
